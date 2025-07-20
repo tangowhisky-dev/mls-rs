@@ -28,7 +28,7 @@ Generate a MLS signature keypair using the default crypto provider.
 
 **Example:**
 ```swift
-let keypair = try generateSignatureKeypair(cipherSuite: .MLS_128_DHKEMX25519_AES128GCM_SHA256_Ed25519)
+let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
 ```
 
 ### clientConfigDefault()
@@ -234,15 +234,16 @@ Main MLS client implementation for creating and managing groups.
 
 #### Initializer
 
-##### init(signingKeypair:config:)
+##### init(id:signatureKeypair:clientConfig:)
 ```swift
-public init(signingKeypair: SignatureKeypair, config: ClientConfig) throws
+public convenience init(id: Data, signatureKeypair: SignatureKeypair, clientConfig: ClientConfig)
 ```
 Create a new MLS client.
 
 **Parameters:**
-- `signingKeypair`: Client's signature keypair
-- `config`: Client configuration
+- `id`: Unique identifier for the client
+- `signatureKeypair`: Client's signature keypair
+- `clientConfig`: Client configuration
 
 ### Group
 ```swift
@@ -342,11 +343,11 @@ public enum CipherSuite
 Supported MLS cipher suites.
 
 **Cases:**
-- `.MLS_128_DHKEMX25519_AES128GCM_SHA256_Ed25519` - X25519 + AES-128-GCM + SHA-256 + Ed25519
-- `.MLS_128_DHKEMP256_AES128GCM_SHA256_P256` - P-256 + AES-128-GCM + SHA-256 + ECDSA P-256
-- `.MLS_128_DHKEMX25519_CHACHA20POLY1305_SHA256_Ed25519` - X25519 + ChaCha20Poly1305 + SHA-256 + Ed25519
-- `.MLS_256_DHKEMX448_AES256GCM_SHA512_Ed448` - X448 + AES-256-GCM + SHA-512 + Ed448
-- `.MLS_256_DHKEMP521_AES256GCM_SHA512_P521` - P-521 + AES-256-GCM + SHA-512 + ECDSA P-521
+- `.curve25519Aes128` - Curve25519 + AES-128-GCM + SHA-256 + Ed25519 (Suite ID: 1)
+- `.p256Aes128` - P-256 + AES-128-GCM + SHA-256 + ECDSA P-256 (Suite ID: 2)
+- `.curve25519Chacha` - Curve25519 + ChaCha20-Poly1305 + SHA-256 + Ed25519 (Suite ID: 3)
+- `.p521Aes256` - P-521 + AES-256-GCM + SHA-512 + ECDSA P-521 (Suite ID: 5)
+- `.p384Aes256` - P-384 + AES-256-GCM + SHA-512 + ECDSA P-384 (Suite ID: 7)
 
 ### ProtocolVersion
 ```swift
@@ -427,12 +428,14 @@ do {
 ```swift
 import MlsRs
 
+```swift
 // Generate client keypair
-let keypair = try generateSignatureKeypair(cipherSuite: .MLS_128_DHKEMX25519_AES128GCM_SHA256_Ed25519)
+let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
 
 // Create client with default config
 let config = clientConfigDefault()
-let client = try Client(signingKeypair: keypair, config: config)
+let clientId = Data("my-client".utf8)
+let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
 ```
 
 ### Creating and Joining Groups
