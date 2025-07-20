@@ -4,3 +4,25 @@ Cargo.lock
 .vscode
 rust-toolchain.toml
 **.swp
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build artifacts that can be regenerated
+mls-rs-uniffi/.cargo/
+mls-rs-uniffi/target/
+
+# Swift build artifacts
+.build/
+*.xcodeproj
+*.xcworkspace
+
+# Generated bindings (optional - these can be regenerated)
+# Uncomment if you want to exclude generated bindings:
+# mls-rs-uniffi/bindings/

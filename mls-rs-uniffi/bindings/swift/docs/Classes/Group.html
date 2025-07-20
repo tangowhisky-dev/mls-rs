@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Group Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/Group" class="dashAnchor"></a>
+
+    <a title="Group Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          MlsRs Docs
+        </a>
+         (76% documented)
+      </p>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/awslabs/mls-rs">
+            <img class="header-icon" src="../img/gh.png" alt="GitHub"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">MlsRs</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      <a class="breadcrumb" href="../Core%20Classes.html">Core Classes</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      Group Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Core%20Classes.html">Core Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Client.html">Client</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Core%20Classes.html#/s:5MlsRs7MessageC">Message</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Classes.html">Other Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Classes.html#/s:5MlsRs9ExtensionC">Extension</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Classes.html#/s:5MlsRs13ExtensionListC">ExtensionList</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>Group</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">Group</span><span class="p">:</span>
+    <span class="kt">GroupProtocol</span></code></pre>
+
+                </div>
+              </div>
+            <p>An MLS end-to-end encrypted group.</p>
+
+<p>The group is used to send and process incoming messages and to
+ add/remove users.</p>
+
+<p>See [<code>mls_rs::Group</code>] for details.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC10addMembers11keyPackagesAA12CommitOutputVSayAA7MessageCG_tKF"></a>
+                    <a name="//apple_ref/swift/Method/addMembers(keyPackages:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC10addMembers11keyPackagesAA12CommitOutputVSayAA7MessageCG_tKF">addMembers(keyPackages:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Commit the addition of one or more members.</p>
+
+<p>The members are representated by key packages. The result is
+ the welcome messages to send to the new members.</p>
+
+<p>See [<code>mls_rs::group::CommitBuilder::add_member</code>] for details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">addMembers</span><span class="p">(</span><span class="nv">keyPackages</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Core%20Classes.html#/s:5MlsRs7MessageC">Message</a></span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">CommitOutput</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC6commitAA12CommitOutputVyKF"></a>
+                    <a name="//apple_ref/swift/Method/commit()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC6commitAA12CommitOutputVyKF">commit()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Perform a commit of received proposals (or an empty commit).</p>
+
+<p>TODO: ensure <code>path_required</code> is always set in
+ <a href="%60mls_rs::MlsRules::commit_options%60"><code>MlsRules::commit_options</code></a>.</p>
+
+<p>Returns the resulting commit message. See
+ [<code>mls_rs::Group::commit</code>] for details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">commit</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">CommitOutput</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC25encryptApplicationMessage7messageAA0F0C10Foundation4DataV_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encryptApplicationMessage(message:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC25encryptApplicationMessage7messageAA0F0C10Foundation4DataV_tKF">encryptApplicationMessage(message:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Encrypt an application message using the current group state.</p>
+
+<p>An application message is an application-specific payload,
+ e.g., an UTF-8 encoded text message in a chat app. The
+ encoding is not determined by MLS and applications will have
+ to implement their own mechanism for how to agree on the
+ content encoding.</p>
+
+<p>The other group members will find the message in
+ [<code>ReceivedMessage::ApplicationMessage</code>] after calling
+ [<code>Group::process_incoming_message</code>].</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">encryptApplicationMessage</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Core%20Classes.html#/s:5MlsRs7MessageC">Message</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC10exportTreeAA07RatchetE0VyKF"></a>
+                    <a name="//apple_ref/swift/Method/exportTree()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC10exportTreeAA07RatchetE0VyKF">exportTree()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Export the current epoch&rsquo;s ratchet tree in serialized format.</p>
+
+<p>This function is used to provide the current group tree to new
+ members when <code>use_ratchet_tree_extension</code> is set to false in
+ <code>ClientConfig</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">exportTree</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">RatchetTree</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC22processIncomingMessage7messageAA08ReceivedF0OAA0F0C_tKF"></a>
+                    <a name="//apple_ref/swift/Method/processIncomingMessage(message:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC22processIncomingMessage7messageAA08ReceivedF0OAA0F0C_tKF">processIncomingMessage(message:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Process an inbound message for this group.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">processIncomingMessage</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../Core%20Classes.html#/s:5MlsRs7MessageC">Message</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ReceivedMessage</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC17proposeAddMembers11keyPackagesSayAA7MessageCGAH_tKF"></a>
+                    <a name="//apple_ref/swift/Method/proposeAddMembers(keyPackages:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC17proposeAddMembers11keyPackagesSayAA7MessageCGAH_tKF">proposeAddMembers(keyPackages:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Propose to add one or more members to this group.</p>
+
+<p>The members are representated by key packages. The result is
+ the proposal messages to send to the group.</p>
+
+<p>See [<code>mls_rs::Group::propose_add</code>] for details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">proposeAddMembers</span><span class="p">(</span><span class="nv">keyPackages</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Core%20Classes.html#/s:5MlsRs7MessageC">Message</a></span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Core%20Classes.html#/s:5MlsRs7MessageC">Message</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC20proposeRemoveMembers17signingIdentitiesSayAA7MessageCGSayAA15SigningIdentityCG_tKF"></a>
+                    <a name="//apple_ref/swift/Method/proposeRemoveMembers(signingIdentities:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC20proposeRemoveMembers17signingIdentitiesSayAA7MessageCGSayAA15SigningIdentityCG_tKF">proposeRemoveMembers(signingIdentities:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Propose to remove one or more members from this group.</p>
+
+<p>The members are representated by their signing identities. The
+ result is the proposal messages to send to the group.</p>
+
+<p>See [<code>mls_rs::group::Group::propose_remove</code>] for details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">proposeRemoveMembers</span><span class="p">(</span><span class="nv">signingIdentities</span><span class="p">:</span> <span class="p">[</span><span class="kt">SigningIdentity</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Core%20Classes.html#/s:5MlsRs7MessageC">Message</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC13removeMembers17signingIdentitiesAA12CommitOutputVSayAA15SigningIdentityCG_tKF"></a>
+                    <a name="//apple_ref/swift/Method/removeMembers(signingIdentities:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC13removeMembers17signingIdentitiesAA12CommitOutputVSayAA15SigningIdentityCG_tKF">removeMembers(signingIdentities:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Propose and commit the removal of one or more members.</p>
+
+<p>The members are representated by their signing identities.</p>
+
+<p>See [<code>mls_rs::group::CommitBuilder::remove_member</code>] for details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">removeMembers</span><span class="p">(</span><span class="nv">signingIdentities</span><span class="p">:</span> <span class="p">[</span><span class="kt">SigningIdentity</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">CommitOutput</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs5GroupC14writeToStorageyyKF"></a>
+                    <a name="//apple_ref/swift/Method/writeToStorage()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs5GroupC14writeToStorageyyKF">writeToStorage()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Write the current state of the group to storage defined by
+[<code>ClientConfig::group_state_storage</code>]</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">writeToStorage</span><span class="p">()</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>© 2025 AWS Labs. Licensed under Apache 2.0 or MIT.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
+  </body>
+</html>

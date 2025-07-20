@@ -1,0 +1,1461 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 17,
+      "symbol": "MLSGroupState.groupId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 18,
+      "symbol": "MLSGroupState.groupState",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 19,
+      "symbol": "MLSGroupState.createdAt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 20,
+      "symbol": "MLSGroupState.updatedAt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 22,
+      "symbol": "MLSGroupState.init(groupId:groupState:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 44,
+      "symbol": "MLSEpochData.groupId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 45,
+      "symbol": "MLSEpochData.epochId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 46,
+      "symbol": "MLSEpochData.epochData",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 47,
+      "symbol": "MLSEpochData.createdAt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 49,
+      "symbol": "MLSEpochData.init(groupId:epochId:epochData:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 124,
+      "symbol": "SwiftDataStorage.state(groupId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 140,
+      "symbol": "SwiftDataStorage.epoch(groupId:epochId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 157,
+      "symbol": "SwiftDataStorage.write(groupId:groupState:epochInserts:epochUpdates:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/SwiftDataStorage.swift",
+      "line": 221,
+      "symbol": "SwiftDataStorage.maxEpochId(groupId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 173,
+      "symbol": "FfiConverterPrimitive.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 177,
+      "symbol": "FfiConverterPrimitive.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 187,
+      "symbol": "FfiConverterRustBuffer.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 197,
+      "symbol": "FfiConverterRustBuffer.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 523,
+      "symbol": "ClientProtocol.signingIdentity()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 538,
+      "symbol": "Client.NoPointer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 544,
+      "symbol": "Client.init(unsafeFromRawPointer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 557,
+      "symbol": "Client.uniffiClonePointer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 678,
+      "symbol": "FfiConverterTypeClient.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 682,
+      "symbol": "FfiConverterTypeClient.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 686,
+      "symbol": "FfiConverterTypeClient.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 697,
+      "symbol": "FfiConverterTypeClient.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 736,
+      "symbol": "Extension.NoPointer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 742,
+      "symbol": "Extension.init(unsafeFromRawPointer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 755,
+      "symbol": "Extension.uniffiClonePointer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 774,
+      "symbol": "FfiConverterTypeExtension",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 779,
+      "symbol": "FfiConverterTypeExtension.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 783,
+      "symbol": "FfiConverterTypeExtension.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 787,
+      "symbol": "FfiConverterTypeExtension.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 798,
+      "symbol": "FfiConverterTypeExtension.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 808,
+      "symbol": "FfiConverterTypeExtension_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 812,
+      "symbol": "FfiConverterTypeExtension_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 835,
+      "symbol": "ExtensionList.NoPointer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 841,
+      "symbol": "ExtensionList.init(unsafeFromRawPointer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 854,
+      "symbol": "ExtensionList.uniffiClonePointer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 873,
+      "symbol": "FfiConverterTypeExtensionList",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 878,
+      "symbol": "FfiConverterTypeExtensionList.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 882,
+      "symbol": "FfiConverterTypeExtensionList.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 886,
+      "symbol": "FfiConverterTypeExtensionList.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 897,
+      "symbol": "FfiConverterTypeExtensionList.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 907,
+      "symbol": "FfiConverterTypeExtensionList_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 911,
+      "symbol": "FfiConverterTypeExtensionList_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1029,
+      "symbol": "Group.NoPointer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1035,
+      "symbol": "Group.init(unsafeFromRawPointer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1048,
+      "symbol": "Group.uniffiClonePointer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1202,
+      "symbol": "FfiConverterTypeGroup",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1207,
+      "symbol": "FfiConverterTypeGroup.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1211,
+      "symbol": "FfiConverterTypeGroup.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1215,
+      "symbol": "FfiConverterTypeGroup.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1226,
+      "symbol": "FfiConverterTypeGroup.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1236,
+      "symbol": "FfiConverterTypeGroup_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1240,
+      "symbol": "FfiConverterTypeGroup_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1247,
+      "symbol": "GroupStateStorage",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1249,
+      "symbol": "GroupStateStorage.state(groupId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1251,
+      "symbol": "GroupStateStorage.epoch(groupId:epochId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1253,
+      "symbol": "GroupStateStorage.write(groupId:groupState:epochInserts:epochUpdates:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1255,
+      "symbol": "GroupStateStorage.maxEpochId(groupId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1259,
+      "symbol": "GroupStateStorageImpl",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1265,
+      "symbol": "GroupStateStorageImpl.NoPointer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1271,
+      "symbol": "GroupStateStorageImpl.init(unsafeFromRawPointer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1284,
+      "symbol": "GroupStateStorageImpl.uniffiClonePointer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1300,
+      "symbol": "GroupStateStorageImpl.state(groupId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1308,
+      "symbol": "GroupStateStorageImpl.epoch(groupId:epochId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1317,
+      "symbol": "GroupStateStorageImpl.write(groupId:groupState:epochInserts:epochUpdates:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1327,
+      "symbol": "GroupStateStorageImpl.maxEpochId(groupId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1472,
+      "symbol": "FfiConverterTypeGroupStateStorage",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1478,
+      "symbol": "FfiConverterTypeGroupStateStorage.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1482,
+      "symbol": "FfiConverterTypeGroupStateStorage.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1489,
+      "symbol": "FfiConverterTypeGroupStateStorage.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1500,
+      "symbol": "FfiConverterTypeGroupStateStorage.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1510,
+      "symbol": "FfiConverterTypeGroupStateStorage_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1514,
+      "symbol": "FfiConverterTypeGroupStateStorage_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1537,
+      "symbol": "Message.NoPointer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1543,
+      "symbol": "Message.init(unsafeFromRawPointer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1556,
+      "symbol": "Message.uniffiClonePointer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1575,
+      "symbol": "FfiConverterTypeMessage",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1580,
+      "symbol": "FfiConverterTypeMessage.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1584,
+      "symbol": "FfiConverterTypeMessage.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1588,
+      "symbol": "FfiConverterTypeMessage.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1599,
+      "symbol": "FfiConverterTypeMessage.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1609,
+      "symbol": "FfiConverterTypeMessage_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1613,
+      "symbol": "FfiConverterTypeMessage_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1620,
+      "symbol": "ProposalProtocol",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1624,
+      "symbol": "Proposal",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1630,
+      "symbol": "Proposal.NoPointer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1636,
+      "symbol": "Proposal.init(unsafeFromRawPointer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1649,
+      "symbol": "Proposal.uniffiClonePointer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1668,
+      "symbol": "FfiConverterTypeProposal",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1673,
+      "symbol": "FfiConverterTypeProposal.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1677,
+      "symbol": "FfiConverterTypeProposal.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1681,
+      "symbol": "FfiConverterTypeProposal.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1692,
+      "symbol": "FfiConverterTypeProposal.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1702,
+      "symbol": "FfiConverterTypeProposal_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1706,
+      "symbol": "FfiConverterTypeProposal_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1713,
+      "symbol": "SigningIdentityProtocol",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1717,
+      "symbol": "SigningIdentity",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1724,
+      "symbol": "SigningIdentity.NoPointer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1730,
+      "symbol": "SigningIdentity.init(unsafeFromRawPointer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1743,
+      "symbol": "SigningIdentity.uniffiClonePointer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1771,
+      "symbol": "FfiConverterTypeSigningIdentity",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1776,
+      "symbol": "FfiConverterTypeSigningIdentity.lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1780,
+      "symbol": "FfiConverterTypeSigningIdentity.lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1784,
+      "symbol": "FfiConverterTypeSigningIdentity.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1795,
+      "symbol": "FfiConverterTypeSigningIdentity.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1805,
+      "symbol": "FfiConverterTypeSigningIdentity_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1809,
+      "symbol": "FfiConverterTypeSigningIdentity_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1814,
+      "symbol": "ClientConfig",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1815,
+      "symbol": "ClientConfig.groupStateStorage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1824,
+      "symbol": "ClientConfig.init(groupStateStorage:useRatchetTreeExtension:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1836,
+      "symbol": "FfiConverterTypeClientConfig",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1837,
+      "symbol": "FfiConverterTypeClientConfig.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1845,
+      "symbol": "FfiConverterTypeClientConfig.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1852,
+      "symbol": "FfiConverterTypeClientConfig_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1856,
+      "symbol": "FfiConverterTypeClientConfig_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1861,
+      "symbol": "CommitOutput",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1884,
+      "symbol": "CommitOutput.init(commitMessage:welcomeMessage:ratchetTree:groupInfo:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1909,
+      "symbol": "FfiConverterTypeCommitOutput",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1910,
+      "symbol": "FfiConverterTypeCommitOutput.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1920,
+      "symbol": "FfiConverterTypeCommitOutput.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1929,
+      "symbol": "FfiConverterTypeCommitOutput_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1933,
+      "symbol": "FfiConverterTypeCommitOutput_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1938,
+      "symbol": "EpochRecord",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1943,
+      "symbol": "EpochRecord.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1947,
+      "symbol": "EpochRecord.init(id:data:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1958,
+      "symbol": "EpochRecord",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1976,
+      "symbol": "FfiConverterTypeEpochRecord",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1977,
+      "symbol": "FfiConverterTypeEpochRecord.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1985,
+      "symbol": "FfiConverterTypeEpochRecord.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1992,
+      "symbol": "FfiConverterTypeEpochRecord_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1996,
+      "symbol": "FfiConverterTypeEpochRecord_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2017,
+      "symbol": "JoinInfo.init(group:groupInfoExtensions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2032,
+      "symbol": "FfiConverterTypeJoinInfo",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2033,
+      "symbol": "FfiConverterTypeJoinInfo.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2041,
+      "symbol": "FfiConverterTypeJoinInfo.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2048,
+      "symbol": "FfiConverterTypeJoinInfo_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2052,
+      "symbol": "FfiConverterTypeJoinInfo_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2057,
+      "symbol": "RatchetTree",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2058,
+      "symbol": "RatchetTree.bytes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2062,
+      "symbol": "RatchetTree.init(bytes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2069,
+      "symbol": "RatchetTree",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2083,
+      "symbol": "FfiConverterTypeRatchetTree",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2084,
+      "symbol": "FfiConverterTypeRatchetTree.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2091,
+      "symbol": "FfiConverterTypeRatchetTree.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2097,
+      "symbol": "FfiConverterTypeRatchetTree_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2101,
+      "symbol": "FfiConverterTypeRatchetTree_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2110,
+      "symbol": "SignatureKeypair.cipherSuite",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2111,
+      "symbol": "SignatureKeypair.publicKey",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2112,
+      "symbol": "SignatureKeypair.secretKey",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2116,
+      "symbol": "SignatureKeypair.init(cipherSuite:publicKey:secretKey:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2147,
+      "symbol": "FfiConverterTypeSignatureKeypair",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2148,
+      "symbol": "FfiConverterTypeSignatureKeypair.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2157,
+      "symbol": "FfiConverterTypeSignatureKeypair.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2165,
+      "symbol": "FfiConverterTypeSignatureKeypair_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2169,
+      "symbol": "FfiConverterTypeSignatureKeypair_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2178,
+      "symbol": "SignaturePublicKey.bytes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2182,
+      "symbol": "SignaturePublicKey.init(bytes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2203,
+      "symbol": "FfiConverterTypeSignaturePublicKey",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2204,
+      "symbol": "FfiConverterTypeSignaturePublicKey.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2211,
+      "symbol": "FfiConverterTypeSignaturePublicKey.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2217,
+      "symbol": "FfiConverterTypeSignaturePublicKey_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2221,
+      "symbol": "FfiConverterTypeSignaturePublicKey_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2230,
+      "symbol": "SignatureSecretKey.bytes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2234,
+      "symbol": "SignatureSecretKey.init(bytes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2255,
+      "symbol": "FfiConverterTypeSignatureSecretKey",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2256,
+      "symbol": "FfiConverterTypeSignatureSecretKey.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2263,
+      "symbol": "FfiConverterTypeSignatureSecretKey.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2269,
+      "symbol": "FfiConverterTypeSignatureSecretKey_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2273,
+      "symbol": "FfiConverterTypeSignatureSecretKey_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2288,
+      "symbol": "CipherSuite.curve25519Aes128",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2292,
+      "symbol": "FfiConverterTypeCipherSuite",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2295,
+      "symbol": "FfiConverterTypeCipherSuite.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2305,
+      "symbol": "FfiConverterTypeCipherSuite.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2317,
+      "symbol": "FfiConverterTypeCipherSuite_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2321,
+      "symbol": "FfiConverterTypeCipherSuite_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2334,
+      "symbol": "CommitEffect",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2336,
+      "symbol": "CommitEffect.newEpoch(appliedProposals:unusedProposals:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2338,
+      "symbol": "CommitEffect.reInit",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2339,
+      "symbol": "CommitEffect.removed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2343,
+      "symbol": "FfiConverterTypeCommitEffect",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2346,
+      "symbol": "FfiConverterTypeCommitEffect.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2361,
+      "symbol": "FfiConverterTypeCommitEffect.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2383,
+      "symbol": "FfiConverterTypeCommitEffect_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2387,
+      "symbol": "FfiConverterTypeCommitEffect_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2395,
+      "symbol": "MlsError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2399,
+      "symbol": "MlsError.MlsError(message:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2401,
+      "symbol": "MlsError.AnyError(message:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2403,
+      "symbol": "MlsError.MlsCodecError(message:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2405,
+      "symbol": "MlsError.UnexpectedCallbackError(message:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2410,
+      "symbol": "FfiConverterTypeError",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2413,
+      "symbol": "FfiConverterTypeError.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2441,
+      "symbol": "FfiConverterTypeError.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2462,
+      "symbol": "MlsError",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2467,
+      "symbol": "ProtocolVersion",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2476,
+      "symbol": "FfiConverterTypeProtocolVersion",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2479,
+      "symbol": "FfiConverterTypeProtocolVersion.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2489,
+      "symbol": "FfiConverterTypeProtocolVersion.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2501,
+      "symbol": "FfiConverterTypeProtocolVersion_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2505,
+      "symbol": "FfiConverterTypeProtocolVersion_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2511,
+      "symbol": "ProtocolVersion",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2556,
+      "symbol": "FfiConverterTypeReceivedMessage",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2559,
+      "symbol": "FfiConverterTypeReceivedMessage.read(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2582,
+      "symbol": "FfiConverterTypeReceivedMessage.write(_:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2620,
+      "symbol": "FfiConverterTypeReceivedMessage_lift(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2624,
+      "symbol": "FfiConverterTypeReceivedMessage_lower(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift"
+}

@@ -1,0 +1,4 @@
+module MlsRsFFI {
+    header "mls_rs_uniffi.h"
+    export *
+}

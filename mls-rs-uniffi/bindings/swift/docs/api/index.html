@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MlsRs  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a title="MlsRs  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">MlsRs Docs</a> (33% documented)</p>
+        <p class="header-right"><a href="https://github.com/awslabs/mls-rs"><img src="img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <div class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">MlsRs</a>
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Core%20Classes.html">Core Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Client.html">Client</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Client/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Group/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Message.html">Message</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Message/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SigningIdentity.html">SigningIdentity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SigningIdentity/NoPointer.html">– NoPointer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Storage.html">Storage</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/GroupStateStorage.html">GroupStateStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SwiftDataStorage.html">SwiftDataStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EpochRecord.html">EpochRecord</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Configuration.html">Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/ClientConfig.html">ClientConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/CipherSuite.html">CipherSuite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SignatureKeypair.html">SignatureKeypair</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Data%20Types.html">Data Types</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/CommitOutput.html">CommitOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/JoinInfo.html">JoinInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RatchetTree.html">RatchetTree</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Global%20Functions.html">Global Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Global%20Functions.html#/s:5MlsRs19clientConfigDefaultAA06ClientD0VyF">clientConfigDefault()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Global%20Functions.html#/s:5MlsRs24generateSignatureKeypair11cipherSuiteAA0dE0VAA06CipherG0O_tKF">generateSignatureKeypair(cipherSuite:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Other%20Classes.html">Other Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Extension.html">Extension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Extension/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ExtensionList.html">ExtensionList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ExtensionList/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/GroupStateStorageImpl.html">GroupStateStorageImpl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/GroupStateStorageImpl/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MLSEpochData.html">MLSEpochData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MLSGroupState.html">MLSGroupState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Proposal.html">Proposal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Proposal/NoPointer.html">– NoPointer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Other%20Enums.html">Other Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/CommitEffect.html">CommitEffect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/MlsError.html">MlsError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ProtocolVersion.html">ProtocolVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ReceivedMessage.html">ReceivedMessage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Other%20Functions.html">Other Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs32FfiConverterTypeCipherSuite_liftyAA0fG0OSo10RustBufferVKF">FfiConverterTypeCipherSuite_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs33FfiConverterTypeCipherSuite_lowerySo10RustBufferVAA0fG0OF">FfiConverterTypeCipherSuite_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs33FfiConverterTypeClientConfig_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeClientConfig_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs34FfiConverterTypeClientConfig_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeClientConfig_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs27FfiConverterTypeClient_liftyAA0F0CSvKF">FfiConverterTypeClient_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs28FfiConverterTypeClient_lowerySvAA0F0CF">FfiConverterTypeClient_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs33FfiConverterTypeCommitEffect_liftyAA0fG0OSo10RustBufferVKF">FfiConverterTypeCommitEffect_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs34FfiConverterTypeCommitEffect_lowerySo10RustBufferVAA0fG0OF">FfiConverterTypeCommitEffect_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs33FfiConverterTypeCommitOutput_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeCommitOutput_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs34FfiConverterTypeCommitOutput_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeCommitOutput_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs32FfiConverterTypeEpochRecord_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeEpochRecord_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs33FfiConverterTypeEpochRecord_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeEpochRecord_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs34FfiConverterTypeExtensionList_liftyAA0fG0CSvKF">FfiConverterTypeExtensionList_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs35FfiConverterTypeExtensionList_lowerySvAA0fG0CF">FfiConverterTypeExtensionList_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs30FfiConverterTypeExtension_liftyAA0F0CSvKF">FfiConverterTypeExtension_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs31FfiConverterTypeExtension_lowerySvAA0F0CF">FfiConverterTypeExtension_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs38FfiConverterTypeGroupStateStorage_liftyAA0fgH0_pSvKF">FfiConverterTypeGroupStateStorage_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs39FfiConverterTypeGroupStateStorage_lowerySvAA0fgH0_pF">FfiConverterTypeGroupStateStorage_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs26FfiConverterTypeGroup_liftyAA0F0CSvKF">FfiConverterTypeGroup_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs27FfiConverterTypeGroup_lowerySvAA0F0CF">FfiConverterTypeGroup_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs29FfiConverterTypeJoinInfo_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeJoinInfo_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs30FfiConverterTypeJoinInfo_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeJoinInfo_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs28FfiConverterTypeMessage_liftyAA0F0CSvKF">FfiConverterTypeMessage_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs29FfiConverterTypeMessage_lowerySvAA0F0CF">FfiConverterTypeMessage_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs29FfiConverterTypeProposal_liftyAA0F0CSvKF">FfiConverterTypeProposal_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs30FfiConverterTypeProposal_lowerySvAA0F0CF">FfiConverterTypeProposal_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs36FfiConverterTypeProtocolVersion_liftyAA0fG0OSo10RustBufferVKF">FfiConverterTypeProtocolVersion_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs37FfiConverterTypeProtocolVersion_lowerySo10RustBufferVAA0fG0OF">FfiConverterTypeProtocolVersion_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs32FfiConverterTypeRatchetTree_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeRatchetTree_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs33FfiConverterTypeRatchetTree_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeRatchetTree_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs36FfiConverterTypeReceivedMessage_liftyAA0fG0OSo10RustBufferVKF">FfiConverterTypeReceivedMessage_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs37FfiConverterTypeReceivedMessage_lowerySo10RustBufferVAA0fG0OF">FfiConverterTypeReceivedMessage_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs37FfiConverterTypeSignatureKeypair_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeSignatureKeypair_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs38FfiConverterTypeSignatureKeypair_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeSignatureKeypair_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs39FfiConverterTypeSignaturePublicKey_liftyAA0fgH0VSo10RustBufferVKF">FfiConverterTypeSignaturePublicKey_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs40FfiConverterTypeSignaturePublicKey_lowerySo10RustBufferVAA0fgH0VF">FfiConverterTypeSignaturePublicKey_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs39FfiConverterTypeSignatureSecretKey_liftyAA0fgH0VSo10RustBufferVKF">FfiConverterTypeSignatureSecretKey_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs40FfiConverterTypeSignatureSecretKey_lowerySo10RustBufferVAA0fgH0VF">FfiConverterTypeSignatureSecretKey_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs36FfiConverterTypeSigningIdentity_liftyAA0fG0CSvKF">FfiConverterTypeSigningIdentity_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Functions.html#/s:5MlsRs37FfiConverterTypeSigningIdentity_lowerySvAA0fG0CF">FfiConverterTypeSigningIdentity_lower(_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Other%20Protocols.html">Other Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/ClientProtocol.html">ClientProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Protocols.html#/s:5MlsRs21ExtensionListProtocolP">ExtensionListProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Protocols.html#/s:5MlsRs17ExtensionProtocolP">ExtensionProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/GroupProtocol.html">GroupProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Protocols.html#/s:5MlsRs15MessageProtocolP">MessageProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Protocols.html#/s:5MlsRs16ProposalProtocolP">ProposalProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other%20Protocols.html#/s:5MlsRs23SigningIdentityProtocolP">SigningIdentityProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Other%20Structs.html">Other Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeCipherSuite.html">FfiConverterTypeCipherSuite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeClient.html">FfiConverterTypeClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeClientConfig.html">FfiConverterTypeClientConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeCommitEffect.html">FfiConverterTypeCommitEffect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeCommitOutput.html">FfiConverterTypeCommitOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeEpochRecord.html">FfiConverterTypeEpochRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeError.html">FfiConverterTypeError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeExtension.html">FfiConverterTypeExtension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeExtensionList.html">FfiConverterTypeExtensionList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeGroup.html">FfiConverterTypeGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeGroupStateStorage.html">FfiConverterTypeGroupStateStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeJoinInfo.html">FfiConverterTypeJoinInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeMessage.html">FfiConverterTypeMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeProposal.html">FfiConverterTypeProposal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeProtocolVersion.html">FfiConverterTypeProtocolVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeRatchetTree.html">FfiConverterTypeRatchetTree</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeReceivedMessage.html">FfiConverterTypeReceivedMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeSignatureKeypair.html">FfiConverterTypeSignatureKeypair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeSignaturePublicKey.html">FfiConverterTypeSignaturePublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeSignatureSecretKey.html">FfiConverterTypeSignatureSecretKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FfiConverterTypeSigningIdentity.html">FfiConverterTypeSigningIdentity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SignaturePublicKey.html">SignaturePublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SignatureSecretKey.html">SignatureSecretKey</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='mls-rs-swift-bindings' class='heading'>MLS-RS Swift Bindings</h1>
+
+<p>This package provides Swift bindings for the <a href="https://github.com/awslabs/mls-rs">mls-rs</a> Rust library, enabling iOS and macOS developers to use the Message Layer Security (MLS) protocol in their applications.</p>
+<h2 id='features' class='heading'>Features</h2>
+
+<ul>
+<li><strong>Native iOS and macOS Support</strong>: Compiled for iOS 17.0+ and macOS 14.0+</li>
+<li><strong>CryptoKit Integration</strong>: Uses Apple&rsquo;s CryptoKit framework for cryptographic operations</li>
+<li><strong>Universal Framework</strong>: Single XCFramework supporting iOS Device (ARM64), iOS Simulator (ARM64+x86_64), and macOS (ARM64+x86_64)</li>
+<li><strong>Swift Package Manager</strong>: Easy integration with SPM</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>Add this package to your project using Xcode or by adding it to your <code>Package.swift</code>:</p>
+<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="s">"path/to/mls-rs-swift"</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre>
+
+<p>Then add the library to your target:</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">target</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"YourTarget"</span><span class="p">,</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="nf">product</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"MlsRs"</span><span class="p">,</span> <span class="nv">package</span><span class="p">:</span> <span class="s">"mls-rs-swift"</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>iOS 17.0+ or macOS 14.0+</li>
+<li>Xcode 15.0+</li>
+<li>Swift 5.9+</li>
+</ul>
+<h2 id='quick-start' class='heading'>Quick Start</h2>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">MlsRs</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="c1">// Generate a signature keypair</span>
+    <span class="k">let</span> <span class="nv">keypair</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">generateSignatureKeypair</span><span class="p">(</span><span class="nv">cipherSuite</span><span class="p">:</span> <span class="o">.</span><span class="n">curve25519Aes128</span><span class="p">)</span>
+
+    <span class="c1">// Create client configuration</span>
+    <span class="k">let</span> <span class="nv">config</span> <span class="o">=</span> <span class="nf">clientConfigDefault</span><span class="p">()</span>
+
+    <span class="c1">// Create a client</span>
+    <span class="k">let</span> <span class="nv">clientId</span> <span class="o">=</span> <span class="s">"alice"</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span><span class="o">!</span>
+    <span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">Client</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="n">clientId</span><span class="p">,</span> <span class="nv">signatureKeypair</span><span class="p">:</span> <span class="n">keypair</span><span class="p">,</span> <span class="nv">clientConfig</span><span class="p">:</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="c1">// Create a group</span>
+    <span class="k">let</span> <span class="nv">group</span> <span class="o">=</span> <span class="k">try</span> <span class="n">client</span><span class="o">.</span><span class="nf">createGroup</span><span class="p">(</span><span class="nv">groupId</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+
+    <span class="c1">// Encrypt a message</span>
+    <span class="k">let</span> <span class="nv">message</span> <span class="o">=</span> <span class="s">"Hello, MLS!"</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span><span class="o">!</span>
+    <span class="k">let</span> <span class="nv">encryptedMessage</span> <span class="o">=</span> <span class="k">try</span> <span class="n">group</span><span class="o">.</span><span class="nf">encryptApplicationMessage</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="n">message</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Message encrypted successfully!"</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="k">as</span> <span class="kt">MlsError</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"MLS Error: </span><span class="se">\\</span><span class="s">(error)"</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Unexpected error: </span><span class="se">\\</span><span class="s">(error)"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='api-overview' class='heading'>API Overview</h2>
+<h3 id='core-types' class='heading'>Core Types</h3>
+
+<ul>
+<li><strong><code><a href="Classes/Client.html">Client</a></code></strong>: Main client for MLS operations</li>
+<li><strong><code><a href="Classes/Group.html">Group</a></code></strong>: Represents an MLS group for messaging</li>
+<li><strong><code><a href="Classes/Message.html">Message</a></code></strong>: Encrypted MLS messages</li>
+<li><strong><code><a href="Enums/CipherSuite.html">CipherSuite</a></code></strong>: Supported cipher suites (currently <code>.curve25519Aes128</code>)</li>
+<li><strong><code><a href="Enums/MlsError.html">MlsError</a></code></strong>: Error types for MLS operations</li>
+</ul>
+<h3 id='key-functions' class='heading'>Key Functions</h3>
+
+<ul>
+<li><strong><code><a href="Global%20Functions.html#/s:5MlsRs24generateSignatureKeypair11cipherSuiteAA0dE0VAA06CipherG0O_tKF">generateSignatureKeypair(cipherSuite:)</a></code></strong>: Generate signing keypairs</li>
+<li><strong><code><a href="Global%20Functions.html#/s:5MlsRs19clientConfigDefaultAA06ClientD0VyF">clientConfigDefault()</a></code></strong>: Get default client configuration</li>
+<li><strong><code>Client(id:signatureKeypair:clientConfig:)</code></strong>: Create MLS client</li>
+<li><strong><code>client.createGroup(groupId:)</code></strong>: Create new MLS group</li>
+<li><strong><code>group.encryptApplicationMessage(message:)</code></strong>: Encrypt messages</li>
+<li><strong><code>group.processIncomingMessage(message:)</code></strong>: Process received messages</li>
+</ul>
+<h2 id='error-handling' class='heading'>Error Handling</h2>
+
+<p>The bindings use Swift&rsquo;s error handling with the custom <code><a href="Enums/MlsError.html">MlsError</a></code> type:</p>
+<pre class="highlight swift"><code><span class="k">do</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">group</span> <span class="o">=</span> <span class="k">try</span> <span class="n">client</span><span class="o">.</span><span class="nf">createGroup</span><span class="p">(</span><span class="nv">groupId</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="c1">// ... use group</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="k">as</span> <span class="kt">MlsError</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="n">error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="kt">MlsError</span><span class="p">(</span><span class="k">let</span> <span class="nv">message</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"MLS Protocol Error: </span><span class="se">\\</span><span class="s">(message)"</span><span class="p">)</span>
+    <span class="k">case</span> <span class="o">.</span><span class="kt">AnyError</span><span class="p">(</span><span class="k">let</span> <span class="nv">message</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"General Error: </span><span class="se">\\</span><span class="s">(message)"</span><span class="p">)</span>
+    <span class="c1">// ... handle other error cases</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='architecture' class='heading'>Architecture</h2>
+
+<p>The Swift bindings are built using <a href="https://github.com/mozilla/uniffi-rs">UniFFI</a> which automatically generates Swift code from Rust interfaces. The architecture consists of:</p>
+
+<ol>
+<li><strong>Rust Core</strong>: The mls-rs library compiled to a universal static library</li>
+<li><strong>C FFI Layer</strong>: Generated C headers for foreign function interface</li>
+<li><strong>XCFramework</strong>: Universal framework containing all platform binaries</li>
+<li><strong>Swift Bindings</strong>: Generated Swift code providing type-safe APIs</li>
+</ol>
+<h2 id='building-from-source' class='heading'>Building from Source</h2>
+
+<p>To rebuild the bindings:</p>
+<pre class="highlight shell"><code><span class="c"># Build the Rust library with CryptoKit provider</span>
+<span class="nb">cd </span>mls-rs-uniffi
+cargo build <span class="nt">--release</span> <span class="nt">--features</span> cryptokit
+
+<span class="c"># Generate Swift bindings</span>
+cargo run <span class="nt">--bin</span> uniffi-bindgen generate <span class="nt">--library</span> target/release/libmls_rs_uniffi.dylib <span class="nt">--language</span> swift <span class="nt">--out-dir</span> bindings/swift/Sources/MlsRs
+
+<span class="c"># Create XCFramework</span>
+./build-xcframework.sh
+</code></pre>
+<h2 id='testing' class='heading'>Testing</h2>
+
+<p>Run the test suite:</p>
+<pre class="highlight shell"><code><span class="nb">cd </span>bindings/swift
+swift <span class="nb">test</span>
+</code></pre>
+
+<p>Run the example:</p>
+<pre class="highlight shell"><code>swift run MLSExample
+</code></pre>
+<h2 id='license' class='heading'>License</h2>
+
+<p>This project is licensed under the same terms as mls-rs. See the <a href="../../LICENSE-apache">LICENSE</a> and <a href="../../LICENSE-mit">LICENSE-MIT</a> files for details.</p>
+<h2 id='contributing' class='heading'>Contributing</h2>
+
+<p>Contributions are welcome! Please see <a href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> for guidelines.</p>
+<h2 id='support' class='heading'>Support</h2>
+
+<p>For issues related to the Swift bindings, please file an issue in the <a href="https://github.com/awslabs/mls-rs/issues">mls-rs repository</a>.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2025 AWS Labs. Licensed under Apache 2.0 or MIT.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

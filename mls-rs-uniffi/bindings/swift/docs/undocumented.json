@@ -1,0 +1,54 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1259,
+      "symbol": "GroupStateStorageImpl",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1624,
+      "symbol": "Proposal",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1717,
+      "symbol": "SigningIdentity",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 1958,
+      "symbol": "EpochRecord",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2069,
+      "symbol": "RatchetTree",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2462,
+      "symbol": "MlsError",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift/Sources/MlsRs/mls_rs_uniffi.swift",
+      "line": 2511,
+      "symbol": "ProtocolVersion",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/tango16/code/mls-rs/mls-rs-uniffi/bindings/swift"
+}

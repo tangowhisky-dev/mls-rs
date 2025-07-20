@@ -6,7 +6,7 @@ use mls_rs::{
     identity::basic,
     storage_provider::in_memory::InMemoryGroupStateStorage,
 };
-use mls_rs_crypto_openssl::OpensslCryptoProvider;
+use mls_rs_crypto_cryptokit::CryptoKitProvider;
 
 use self::group_state::{GroupStateStorage, GroupStateStorageAdapter};
 use crate::Error;
@@ -59,7 +59,7 @@ impl mls_rs_core::group::GroupStateStorage for ClientGroupStorage {
 pub type UniFFIConfig = client_builder::WithIdentityProvider<
     basic::BasicIdentityProvider,
     client_builder::WithCryptoProvider<
-        OpensslCryptoProvider,
+        CryptoKitProvider,
         WithGroupStateStorage<ClientGroupStorage, client_builder::BaseConfig>,
     >,
 >;

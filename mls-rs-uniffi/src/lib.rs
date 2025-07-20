@@ -36,7 +36,7 @@ use mls_rs::mls_rules;
 use mls_rs::{CipherSuiteProvider, CryptoProvider};
 use mls_rs_core::identity;
 use mls_rs_core::identity::{BasicCredential, IdentityProvider};
-use mls_rs_crypto_openssl::OpensslCryptoProvider;
+use mls_rs_crypto_cryptokit::CryptoKitProvider;
 
 uniffi::setup_scaffolding!();
 
@@ -271,18 +271,31 @@ pub enum ReceivedMessage {
 
 /// Supported cipher suites.
 ///
-/// This is a subset of the cipher suites found in
+/// This includes all cipher suites supported by the CryptoKit provider,
+/// as documented in RFC 9420: https://www.rfc-editor.org/rfc/rfc9420.html#name-mls-cipher-suites
 /// [`mls_rs::CipherSuite`].
 #[derive(Copy, Clone, Debug, uniffi::Enum)]
 pub enum CipherSuite {
-    // TODO(mgeisler): add more cipher suites.
+    /// MLS_128_DHKEMX25519_AES128GCM_SHA256_Ed25519 (Suite ID: 1)
     Curve25519Aes128,
+    /// MLS_128_DHKEMP256_AES128GCM_SHA256_P256 (Suite ID: 2)
+    P256Aes128,
+    /// MLS_128_DHKEMX25519_CHACHA20POLY1305_SHA256_Ed25519 (Suite ID: 3)
+    Curve25519Chacha,
+    /// MLS_256_DHKEMP521_AES256GCM_SHA512_P521 (Suite ID: 5)
+    P521Aes256,
+    /// MLS_256_DHKEMP384_AES256GCM_SHA384_P384 (Suite ID: 7)
+    P384Aes256,
 }
 
 impl From<CipherSuite> for mls_rs::CipherSuite {
     fn from(cipher_suite: CipherSuite) -> mls_rs::CipherSuite {
         match cipher_suite {
             CipherSuite::Curve25519Aes128 => mls_rs::CipherSuite::CURVE25519_AES128,
+            CipherSuite::P256Aes128 => mls_rs::CipherSuite::P256_AES128,
+            CipherSuite::Curve25519Chacha => mls_rs::CipherSuite::CURVE25519_CHACHA,
+            CipherSuite::P521Aes256 => mls_rs::CipherSuite::P521_AES256,
+            CipherSuite::P384Aes256 => mls_rs::CipherSuite::P384_AES256,
         }
     }
 }
@@ -293,6 +306,10 @@ impl TryFrom<mls_rs::CipherSuite> for CipherSuite {
     fn try_from(cipher_suite: mls_rs::CipherSuite) -> Result<Self, Self::Error> {
         match cipher_suite {
             mls_rs::CipherSuite::CURVE25519_AES128 => Ok(CipherSuite::Curve25519Aes128),
+            mls_rs::CipherSuite::P256_AES128 => Ok(CipherSuite::P256Aes128),
+            mls_rs::CipherSuite::CURVE25519_CHACHA => Ok(CipherSuite::Curve25519Chacha),
+            mls_rs::CipherSuite::P521_AES256 => Ok(CipherSuite::P521Aes256),
+            mls_rs::CipherSuite::P384_AES256 => Ok(CipherSuite::P384Aes256),
             _ => Err(MlsError::UnsupportedCipherSuite(cipher_suite))?,
         }
     }
@@ -310,7 +327,7 @@ impl TryFrom<mls_rs::CipherSuite> for CipherSuite {
 pub async fn generate_signature_keypair(
     cipher_suite: CipherSuite,
 ) -> Result<SignatureKeypair, Error> {
-    let crypto_provider = mls_rs_crypto_openssl::OpensslCryptoProvider::default();
+    let crypto_provider = mls_rs_crypto_cryptokit::CryptoKitProvider::default();
     let cipher_suite_provider = crypto_provider
         .cipher_suite_provider(cipher_suite.into())
         .ok_or(MlsError::UnsupportedCipherSuite(cipher_suite.into()))?;
@@ -354,7 +371,7 @@ impl Client {
         let cipher_suite = signature_keypair.cipher_suite;
         let public_key = signature_keypair.public_key;
         let secret_key = signature_keypair.secret_key;
-        let crypto_provider = OpensslCryptoProvider::new();
+        let crypto_provider = CryptoKitProvider::default();
         let basic_credential = BasicCredential::new(id);
         let signing_identity =
             identity::SigningIdentity::new(basic_credential.into_credential(), public_key.into());

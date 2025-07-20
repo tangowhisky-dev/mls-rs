@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FfiConverterTypeMessage Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/FfiConverterTypeMessage" class="dashAnchor"></a>
+    <a title="FfiConverterTypeMessage Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">MlsRs Docs</a> (33% documented)</p>
+        <p class="header-right"><a href="https://github.com/awslabs/mls-rs"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">MlsRs</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        <a href="../Other%20Structs.html">Other Structures</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        FfiConverterTypeMessage Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Core%20Classes.html">Core Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Client.html">Client</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Client/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Group/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Message.html">Message</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Message/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SigningIdentity.html">SigningIdentity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SigningIdentity/NoPointer.html">– NoPointer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Storage.html">Storage</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/GroupStateStorage.html">GroupStateStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SwiftDataStorage.html">SwiftDataStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EpochRecord.html">EpochRecord</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Configuration.html">Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/ClientConfig.html">ClientConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CipherSuite.html">CipherSuite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SignatureKeypair.html">SignatureKeypair</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Data%20Types.html">Data Types</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CommitOutput.html">CommitOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/JoinInfo.html">JoinInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RatchetTree.html">RatchetTree</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global%20Functions.html">Global Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global%20Functions.html#/s:5MlsRs19clientConfigDefaultAA06ClientD0VyF">clientConfigDefault()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Functions.html#/s:5MlsRs24generateSignatureKeypair11cipherSuiteAA0dE0VAA06CipherG0O_tKF">generateSignatureKeypair(cipherSuite:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Classes.html">Other Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Extension.html">Extension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Extension/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExtensionList.html">ExtensionList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExtensionList/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GroupStateStorageImpl.html">GroupStateStorageImpl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GroupStateStorageImpl/NoPointer.html">– NoPointer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MLSEpochData.html">MLSEpochData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MLSGroupState.html">MLSGroupState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Proposal.html">Proposal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Proposal/NoPointer.html">– NoPointer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Enums.html">Other Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/CommitEffect.html">CommitEffect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MlsError.html">MlsError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ProtocolVersion.html">ProtocolVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ReceivedMessage.html">ReceivedMessage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Functions.html">Other Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs32FfiConverterTypeCipherSuite_liftyAA0fG0OSo10RustBufferVKF">FfiConverterTypeCipherSuite_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs33FfiConverterTypeCipherSuite_lowerySo10RustBufferVAA0fG0OF">FfiConverterTypeCipherSuite_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs33FfiConverterTypeClientConfig_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeClientConfig_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs34FfiConverterTypeClientConfig_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeClientConfig_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs27FfiConverterTypeClient_liftyAA0F0CSvKF">FfiConverterTypeClient_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs28FfiConverterTypeClient_lowerySvAA0F0CF">FfiConverterTypeClient_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs33FfiConverterTypeCommitEffect_liftyAA0fG0OSo10RustBufferVKF">FfiConverterTypeCommitEffect_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs34FfiConverterTypeCommitEffect_lowerySo10RustBufferVAA0fG0OF">FfiConverterTypeCommitEffect_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs33FfiConverterTypeCommitOutput_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeCommitOutput_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs34FfiConverterTypeCommitOutput_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeCommitOutput_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs32FfiConverterTypeEpochRecord_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeEpochRecord_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs33FfiConverterTypeEpochRecord_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeEpochRecord_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs34FfiConverterTypeExtensionList_liftyAA0fG0CSvKF">FfiConverterTypeExtensionList_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs35FfiConverterTypeExtensionList_lowerySvAA0fG0CF">FfiConverterTypeExtensionList_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs30FfiConverterTypeExtension_liftyAA0F0CSvKF">FfiConverterTypeExtension_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs31FfiConverterTypeExtension_lowerySvAA0F0CF">FfiConverterTypeExtension_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs38FfiConverterTypeGroupStateStorage_liftyAA0fgH0_pSvKF">FfiConverterTypeGroupStateStorage_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs39FfiConverterTypeGroupStateStorage_lowerySvAA0fgH0_pF">FfiConverterTypeGroupStateStorage_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs26FfiConverterTypeGroup_liftyAA0F0CSvKF">FfiConverterTypeGroup_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs27FfiConverterTypeGroup_lowerySvAA0F0CF">FfiConverterTypeGroup_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs29FfiConverterTypeJoinInfo_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeJoinInfo_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs30FfiConverterTypeJoinInfo_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeJoinInfo_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs28FfiConverterTypeMessage_liftyAA0F0CSvKF">FfiConverterTypeMessage_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs29FfiConverterTypeMessage_lowerySvAA0F0CF">FfiConverterTypeMessage_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs29FfiConverterTypeProposal_liftyAA0F0CSvKF">FfiConverterTypeProposal_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs30FfiConverterTypeProposal_lowerySvAA0F0CF">FfiConverterTypeProposal_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs36FfiConverterTypeProtocolVersion_liftyAA0fG0OSo10RustBufferVKF">FfiConverterTypeProtocolVersion_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs37FfiConverterTypeProtocolVersion_lowerySo10RustBufferVAA0fG0OF">FfiConverterTypeProtocolVersion_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs32FfiConverterTypeRatchetTree_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeRatchetTree_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs33FfiConverterTypeRatchetTree_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeRatchetTree_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs36FfiConverterTypeReceivedMessage_liftyAA0fG0OSo10RustBufferVKF">FfiConverterTypeReceivedMessage_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs37FfiConverterTypeReceivedMessage_lowerySo10RustBufferVAA0fG0OF">FfiConverterTypeReceivedMessage_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs37FfiConverterTypeSignatureKeypair_liftyAA0fG0VSo10RustBufferVKF">FfiConverterTypeSignatureKeypair_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs38FfiConverterTypeSignatureKeypair_lowerySo10RustBufferVAA0fG0VF">FfiConverterTypeSignatureKeypair_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs39FfiConverterTypeSignaturePublicKey_liftyAA0fgH0VSo10RustBufferVKF">FfiConverterTypeSignaturePublicKey_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs40FfiConverterTypeSignaturePublicKey_lowerySo10RustBufferVAA0fgH0VF">FfiConverterTypeSignaturePublicKey_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs39FfiConverterTypeSignatureSecretKey_liftyAA0fgH0VSo10RustBufferVKF">FfiConverterTypeSignatureSecretKey_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs40FfiConverterTypeSignatureSecretKey_lowerySo10RustBufferVAA0fgH0VF">FfiConverterTypeSignatureSecretKey_lower(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs36FfiConverterTypeSigningIdentity_liftyAA0fG0CSvKF">FfiConverterTypeSigningIdentity_lift(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Functions.html#/s:5MlsRs37FfiConverterTypeSigningIdentity_lowerySvAA0fG0CF">FfiConverterTypeSigningIdentity_lower(_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Protocols.html">Other Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ClientProtocol.html">ClientProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Protocols.html#/s:5MlsRs21ExtensionListProtocolP">ExtensionListProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Protocols.html#/s:5MlsRs17ExtensionProtocolP">ExtensionProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GroupProtocol.html">GroupProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Protocols.html#/s:5MlsRs15MessageProtocolP">MessageProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Protocols.html#/s:5MlsRs16ProposalProtocolP">ProposalProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Protocols.html#/s:5MlsRs23SigningIdentityProtocolP">SigningIdentityProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Structs.html">Other Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeCipherSuite.html">FfiConverterTypeCipherSuite</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeClient.html">FfiConverterTypeClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeClientConfig.html">FfiConverterTypeClientConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeCommitEffect.html">FfiConverterTypeCommitEffect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeCommitOutput.html">FfiConverterTypeCommitOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeEpochRecord.html">FfiConverterTypeEpochRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeError.html">FfiConverterTypeError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeExtension.html">FfiConverterTypeExtension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeExtensionList.html">FfiConverterTypeExtensionList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeGroup.html">FfiConverterTypeGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeGroupStateStorage.html">FfiConverterTypeGroupStateStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeJoinInfo.html">FfiConverterTypeJoinInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeMessage.html">FfiConverterTypeMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeProposal.html">FfiConverterTypeProposal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeProtocolVersion.html">FfiConverterTypeProtocolVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeRatchetTree.html">FfiConverterTypeRatchetTree</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeReceivedMessage.html">FfiConverterTypeReceivedMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeSignatureKeypair.html">FfiConverterTypeSignatureKeypair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeSignaturePublicKey.html">FfiConverterTypeSignaturePublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeSignatureSecretKey.html">FfiConverterTypeSignatureSecretKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FfiConverterTypeSigningIdentity.html">FfiConverterTypeSigningIdentity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SignaturePublicKey.html">SignaturePublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SignatureSecretKey.html">SignatureSecretKey</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>FfiConverterTypeMessage</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FfiConverterTypeMessage</span> <span class="p">:</span> <span class="kt">FfiConverter</span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs23FfiConverterTypeMessageV4liftyAA0F0CSvKFZ"></a>
+                    <a name="//apple_ref/swift/Method/lift(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs23FfiConverterTypeMessageV4liftyAA0F0CSvKFZ">lift(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">lift</span><span class="p">(</span><span class="n">_</span> <span class="nv">pointer</span><span class="p">:</span> <span class="kt">UnsafeMutableRawPointer</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Message.html">Message</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs23FfiConverterTypeMessageV5lowerySvAA0F0CFZ"></a>
+                    <a name="//apple_ref/swift/Method/lower(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs23FfiConverterTypeMessageV5lowerySvAA0F0CFZ">lower(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">lower</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Classes/Message.html">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UnsafeMutableRawPointer</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs23FfiConverterTypeMessageV4read4fromAA0F0C10Foundation4DataV4data_Si6offsettz_tKFZ"></a>
+                    <a name="//apple_ref/swift/Method/read(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs23FfiConverterTypeMessageV4read4fromAA0F0C10Foundation4DataV4data_Si6offsettz_tKFZ">read(from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">read</span><span class="p">(</span><span class="n">from</span> <span class="nv">buf</span><span class="p">:</span> <span class="nf">inout</span> <span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">offset</span><span class="p">:</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Index</span><span class="p">))</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Message.html">Message</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5MlsRs23FfiConverterTypeMessageV5write_4intoyAA0F0C_Says5UInt8VGztFZ"></a>
+                    <a name="//apple_ref/swift/Method/write(_:into:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5MlsRs23FfiConverterTypeMessageV5write_4intoyAA0F0C_Says5UInt8VGztFZ">write(_:<wbr>into:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Classes/Message.html">Message</a></span><span class="p">,</span> <span class="n">into</span> <span class="nv">buf</span><span class="p">:</span> <span class="k">inout</span> <span class="p">[</span><span class="kt">UInt8</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2025 AWS Labs. Licensed under Apache 2.0 or MIT.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
