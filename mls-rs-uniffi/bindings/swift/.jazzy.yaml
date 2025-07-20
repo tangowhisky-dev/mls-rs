@@ -1,0 +1,65 @@
+module: MlsRs
+output: docs
+clean: true
+theme: fullwidth
+skip_undocumented: false
+min_acl: open
+include:
+  - Sources/MlsRs/mls_rs_uniffi.swift
+  - Sources/MlsRs/SwiftDataStorage.swift
+author: AWS Labs
+author_url: https://github.com/awslabs
+github_url: https://github.com/awslabs/mls-rs
+readme: README.md
+
+# Output Configuration
+output: docs/api
+clean: true
+theme: apple
+
+# Documentation Coverage
+min_acl: public
+skip_undocumented: false
+hide_documentation_coverage: false
+
+# Customization
+custom_categories:
+  - name: Core Classes
+    children:
+      - Client
+      - Group
+      - Message
+      - SigningIdentity
+  - name: Storage
+    children:
+      - GroupStateStorage
+      - SwiftDataStorage
+      - EpochRecord
+  - name: Configuration
+    children:
+      - ClientConfig
+      - CipherSuite
+      - SignatureKeypair
+  - name: Data Types
+    children:
+      - CommitOutput
+      - JoinInfo
+      - RatchetTree
+  - name: Global Functions
+    children:
+      - clientConfigDefault()
+      - generateSignatureKeypair(cipherSuite:)
+
+# Exclude private implementation details
+exclude:
+  - "**/*FFI*"
+  - "**/*Converter*"
+  - "**/uniffi*"
+
+# Head and copyright
+head: |
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+copyright: '© 2025 AWS Labs. Licensed under Apache 2.0 or MIT.'

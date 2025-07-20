@@ -10,7 +10,7 @@ This directory contains comprehensive documentation for the MLS-RS Swift binding
 - **[BASIC_USAGE.md](BASIC_USAGE.md)** - Getting started guide with step-by-step examples  
 - **[STORAGE_USAGE.md](STORAGE_USAGE.md)** - Persistence and SwiftData integration patterns
 - **[CRYPTO_PROVIDERS.md](CRYPTO_PROVIDERS.md)** - Security, cipher suites, and crypto provider details
-- **[API_REFERENCE.md](../../../../../docs/API_REFERENCE.md)** - Complete public API documentation for Swift bindings
+- **[API_REFERENCE.md](API_REFERENCE.md)** - Complete public API documentation for Swift bindings
 
 ### 📖 Reference Materials
 - [**API Coverage Report**](../API_COVERAGE_REPORT.md) - Complete API documentation
