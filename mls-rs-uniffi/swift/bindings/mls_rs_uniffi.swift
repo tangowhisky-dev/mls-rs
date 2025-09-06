@@ -2510,8 +2510,7 @@ public struct FfiConverterTypeError: FfiConverterRustBuffer {
 
 
 extension Error: Equatable, Hashable {}
-
-extension Error: Error { }
+extension Error: Swift.Error {}
 
 // Note that we don't yet support `indirect` for enums.
 // See https://github.com/mozilla/uniffi-rs/issues/396 for further discussion.

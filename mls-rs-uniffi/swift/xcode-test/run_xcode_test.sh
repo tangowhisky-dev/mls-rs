@@ -2,8 +2,9 @@
 
 # Xcode Command Line Test for MLS Swift Bindings
 # This script compiles and runs a Swift test program using Xcode's tools
-# Usage: ./run_xcode_test.sh [cipher_suite_id]
+# Usage: ./run_xcode_test.sh [cipher_suite_id] [--release]
 #   cipher_suite_id: 1-7 (default: 1)
+#   --release: Use release version of the library (default: debug)
 #   1 = curve25519Aes128    2 = p256Aes128       3 = curve25519Chacha
 #   4 = curve448Aes256      5 = p521Aes256       6 = curve448Chacha
 #   7 = p384Aes256
@@ -11,23 +12,45 @@
 set -e
 
 # Parse command line arguments
-CIPHER_SUITE_ID=${1:-1}
+CIPHER_SUITE_ID=""
+BUILD_MODE="debug"
+GENERATION_FLAGS=""
 
-# Validate cipher suite ID
-if ! [[ "$CIPHER_SUITE_ID" =~ ^[1-7]$ ]]; then
-    echo "❌ Invalid cipher suite ID: $CIPHER_SUITE_ID"
-    echo "📋 Valid cipher suite IDs:"
-    echo "   1 = curve25519Aes128 (default)"
-    echo "   2 = p256Aes128"
-    echo "   3 = curve25519Chacha" 
-    echo "   4 = curve448Aes256"
-    echo "   5 = p521Aes256"
-    echo "   6 = curve448Chacha"
-    echo "   7 = p384Aes256"
-    echo ""
-    echo "Usage: $0 [1-7]"
-    exit 1
-fi
+for arg in "$@"; do
+    case $arg in
+        --release)
+            BUILD_MODE="release"
+            GENERATION_FLAGS="--release"
+            shift
+            ;;
+        [1-7])
+            CIPHER_SUITE_ID=$arg
+            shift
+            ;;
+        *)
+            if [[ "$arg" =~ ^[0-9]+$ ]]; then
+                echo "❌ Invalid cipher suite ID: $arg"
+            else
+                echo "❌ Unknown argument: $arg"
+            fi
+            echo "📋 Usage: $0 [1-7] [--release]"
+            echo "📋 Valid cipher suite IDs:"
+            echo "   1 = curve25519Aes128 (default)"
+            echo "   2 = p256Aes128"
+            echo "   3 = curve25519Chacha" 
+            echo "   4 = curve448Aes256"
+            echo "   5 = p521Aes256"
+            echo "   6 = curve448Chacha"
+            echo "   7 = p384Aes256"
+            echo "📋 Flags:"
+            echo "   --release = Use optimized release build (default: debug)"
+            exit 1
+            ;;
+    esac
+done
+
+# Set default cipher suite if not provided
+CIPHER_SUITE_ID=${CIPHER_SUITE_ID:-1}
 
 # Map cipher suite ID to name
 case "$CIPHER_SUITE_ID" in
@@ -43,6 +66,7 @@ esac
 echo "🔨 Xcode Command Line Test for MLS Swift Bindings"
 echo "=================================================="
 echo "🎯 Testing with Cipher Suite: $CIPHER_SUITE_NAME (ID: $CIPHER_SUITE_ID)"
+echo "🏗️ Build mode: $BUILD_MODE"
 
 # Get the directory of this script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -78,11 +102,11 @@ fi
 echo "   ✅ Generated Swift bindings found"
 
 # Check if the dynamic library exists
-DYLIB_PATH="$MLS_ROOT_DIR/../target/aarch64-apple-darwin/debug/libmls_rs_uniffi.dylib"
+DYLIB_PATH="$MLS_ROOT_DIR/../target/aarch64-apple-darwin/$BUILD_MODE/libmls_rs_uniffi.dylib"
 if [ ! -f "$DYLIB_PATH" ]; then
     echo "❌ macOS library not found. Running generate_swift_bindings.sh to build library..."
     cd "$MLS_ROOT_DIR"
-    ./generate_swift_bindings.sh
+    ./generate_swift_bindings.sh $GENERATION_FLAGS
     cd "$SCRIPT_DIR"
     
     if [ ! -f "$DYLIB_PATH" ]; then
@@ -91,7 +115,7 @@ if [ ! -f "$DYLIB_PATH" ]; then
     fi
 fi
 
-echo "   ✅ macOS library found"
+echo "   ✅ macOS library found ($BUILD_MODE)"
 
 # Create temporary directory for compilation
 TEMP_DIR=$(mktemp -d)
@@ -113,14 +137,6 @@ cp "$SCRIPT_DIR/groupstate_storage_tests.swift" "$TEMP_DIR/"
 cp "$SCRIPT_DIR/cipher_suite_analysis.swift" "$TEMP_DIR/"
 cp "$SCRIPT_DIR/p521_cipher_suite_test.swift" "$TEMP_DIR/"
 cp "$DYLIB_PATH" "$TEMP_DIR/libmls_rs_uniffi.dylib"
-
-# Fix the Swift Error naming conflict in the generated bindings
-echo "🔧 Fixing Swift Error naming conflicts..."
-# Remove the problematic line that causes naming conflict
-sed -i '' '/^extension Error: Error { }$/d' "$TEMP_DIR/mls_rs_uniffi.swift"
-# Add proper Error protocol conformance instead
-sed -i '' '/^extension Error: Equatable, Hashable {}$/a\
-extension Error: Swift.Error {}' "$TEMP_DIR/mls_rs_uniffi.swift"
 
 echo "🔨 Compiling Swift test program..."
 cd "$TEMP_DIR"

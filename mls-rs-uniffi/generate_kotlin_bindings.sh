@@ -1,6 +1,6 @@
 #!/bin/bash
-# Script to generate Swift bindings for mls-rs-uniffi using UniFFI
-# Usage: ./generate_swift_bindings.sh [--release]
+# Script to generate Kotlin bindings for mls-rs-uniffi using UniFFI
+# Usage: ./generate_kotlin_bindings.sh [--release]
 #   --release: Build and use release version of the library (default: debug)
 
 set -e
@@ -35,20 +35,13 @@ fi
 
 echo "📦 Using library: $LIB_PATH"
 
-echo "🔄 Generating Swift bindings..."
-cargo run -p uniffi-bindgen -- generate --library "$LIB_PATH" --language swift --out-dir swift/bindings
+echo "🔄 Generating Kotlin bindings..."
+cargo run -p uniffi-bindgen -- generate --library "$LIB_PATH" --language kotlin --out-dir kotlin/bindings
 
-echo "🔧 Fixing Swift Error naming conflicts in generated bindings..."
-# Remove the problematic line that causes naming conflict
-sed -i '' '/^extension Error: Error { }$/d' swift/bindings/mls_rs_uniffi.swift
-# Add proper Error protocol conformance instead
-sed -i '' '/^extension Error: Equatable, Hashable {}$/a\
-extension Error: Swift.Error {}' swift/bindings/mls_rs_uniffi.swift
-
-echo "✅ Swift bindings generated and fixed in swift/bindings"
+echo "✅ Kotlin bindings generated in kotlin/bindings"
 echo "🎯 Build mode: $BUILD_MODE"
 echo "📁 Library location: $LIB_PATH"
 
 # Copy the dylib to the bindings directory for easy access
-cp "$LIB_PATH" swift/bindings/
-echo "📦 Library copied to swift/bindings/ for convenience"
+cp "$LIB_PATH" kotlin/bindings/
+echo "📦 Library copied to kotlin/bindings/ for convenience"

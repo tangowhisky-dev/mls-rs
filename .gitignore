@@ -5,3 +5,9 @@ Cargo.lock
 rust-toolchain.toml
 **.swp
 /mls-rs-uniffi/swift/.build
+/mls-rs-uniffi/swift/tests/.build
+/mls-rs-uniffi/swift/tests/Sources
+/mls-rs-uniffi/kotlin/tests/build
+/mls-rs-uniffi/kotlin/tests/.gradle
+mls-rs-uniffi/kotlin/bindings/libmls_rs_uniffi.dylib
+/mls-rs-uniffi/kotlin/tests/src/main/resources
