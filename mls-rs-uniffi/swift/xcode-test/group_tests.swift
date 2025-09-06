@@ -1,11 +1,11 @@
 import Foundation
 
-func testGroupCreation() -> Bool {
+func testGroupCreation(cipherSuite: CipherSuite) -> Bool {
     print("Testing Group Creation...")
     
     do {
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "test_group_alice".data(using: .utf8)!
         
         let alice = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
@@ -31,18 +31,18 @@ func testGroupCreation() -> Bool {
     }
 }
 
-func testGroupMembership() -> Bool {
+func testGroupMembership(cipherSuite: CipherSuite) -> Bool {
     print("Testing Group Membership Operations...")
     
     do {
         // Set up clients
         let config = clientConfigDefault()
         
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "alice_membership".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "bob_membership".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
@@ -80,18 +80,18 @@ func testGroupMembership() -> Bool {
     }
 }
 
-func testGroupProposals() -> Bool {
+func testGroupProposals(cipherSuite: CipherSuite) -> Bool {
     print("Testing Group Proposal Workflow...")
     
     do {
         // Set up clients
         let config = clientConfigDefault()
         
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "alice_proposal".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "bob_proposal".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
@@ -119,12 +119,12 @@ func testGroupProposals() -> Bool {
     }
 }
 
-func testGroupPersistence() -> Bool {
+func testGroupPersistence(cipherSuite: CipherSuite) -> Bool {
     print("Testing Group Persistence...")
     
     do {
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "test_persistence".data(using: .utf8)!
         
         let alice = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)

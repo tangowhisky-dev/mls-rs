@@ -5,7 +5,7 @@ func testGroupCreation() -> Bool {
     
     do {
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "test_group_alice".data(using: .utf8)!
         
         let alice = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
@@ -38,11 +38,11 @@ func testGroupMembership() -> Bool {
         // Set up clients
         let config = clientConfigDefault()
         
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "alice_membership".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "bob_membership".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
@@ -87,11 +87,11 @@ func testGroupProposals() -> Bool {
         // Set up clients
         let config = clientConfigDefault()
         
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "alice_proposal".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "bob_proposal".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
@@ -124,7 +124,7 @@ func testGroupPersistence() -> Bool {
     
     do {
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "test_persistence".data(using: .utf8)!
         
         let alice = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)

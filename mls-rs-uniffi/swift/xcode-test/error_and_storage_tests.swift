@@ -1,6 +1,6 @@
 import Foundation
 
-func testErrorHandlingAndStorage() -> Bool {
+func testErrorHandlingAndStorage(cipherSuite: CipherSuite) -> Bool {
     print("\n=== Testing Error Handling and Storage APIs ===")
     var allTestsPassed = true
     
@@ -11,7 +11,7 @@ func testErrorHandlingAndStorage() -> Bool {
         // Test invalid client creation
         do {
             let invalidConfig = clientConfigDefault()
-            let invalidKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+            let invalidKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
             // Try to create client with empty identifier - this should handle gracefully
             let _ = Client(id: Data(), signatureKeypair: invalidKeypair, clientConfig: invalidConfig)
             print("⚠️ Empty identifier allowed unexpectedly")
@@ -22,7 +22,7 @@ func testErrorHandlingAndStorage() -> Bool {
         // Test invalid group operations
         do {
             let config = clientConfigDefault()
-            let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+            let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
             let clientId = "error_client".data(using: .utf8)!
             let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
             let _ = try client.createGroup(groupId: nil as Data?)
@@ -44,7 +44,7 @@ func testErrorHandlingAndStorage() -> Bool {
     do {
         print("Testing storage operations...")
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "storage_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         let group = try client.createGroup(groupId: nil as Data?)
@@ -67,7 +67,7 @@ func testErrorHandlingAndStorage() -> Bool {
         
         // Test storage configuration with different options
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "storage_test_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         
@@ -88,7 +88,7 @@ func testErrorHandlingAndStorage() -> Bool {
     do {
         print("Testing key package storage...")
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "keypack_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         
@@ -111,8 +111,8 @@ func testErrorHandlingAndStorage() -> Bool {
     do {
         print("Testing large message handling...")
         let config = clientConfigDefault()
-        let keypair1 = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
-        let keypair2 = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair1 = try generateSignatureKeypair(cipherSuite: cipherSuite)
+        let keypair2 = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId1 = "large_client1".data(using: .utf8)!
         let clientId2 = "large_client2".data(using: .utf8)!
         let client1 = Client(id: clientId1, signatureKeypair: keypair1, clientConfig: config)
@@ -158,7 +158,7 @@ func testErrorHandlingAndStorage() -> Bool {
         print("Testing configuration edge cases...")
         
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "config_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         let _ = try client.createGroup(groupId: nil as Data?)

@@ -1,13 +1,13 @@
 import Foundation
 
 // GroupStateStorage API Tests
-func testGroupStateStorageAPIs() -> Bool {
+func testGroupStateStorageAPIs(cipherSuite: CipherSuite) -> Bool {
     print("  🔬 Testing GroupStateStorage APIs...")
     
     do {
         // Create a client with storage to access GroupStateStorage indirectly
         let config = clientConfigDefault()
-        let signingKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let signingKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "storage_test_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: signingKeypair, clientConfig: config)
         
@@ -55,13 +55,13 @@ func testGroupStateStorageAPIs() -> Bool {
 }
 
 // Extension and Message Wrapper Tests
-func testExtensionAndMessageWrappers() -> Bool {
+func testExtensionAndMessageWrappers(cipherSuite: CipherSuite) -> Bool {
     print("  🔬 Testing Extension and Message wrapper classes...")
     
     do {
         // Create basic objects to work with
         let config = clientConfigDefault()
-        let signingKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let signingKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "wrapper_test_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: signingKeypair, clientConfig: config)
         

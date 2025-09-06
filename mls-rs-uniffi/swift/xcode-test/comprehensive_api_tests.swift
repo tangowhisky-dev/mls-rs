@@ -2,22 +2,22 @@ import Foundation
 
 // MARK: - Advanced Group Operations Tests
 
-func testAdvancedGroupOperations() -> Bool {
+func testAdvancedGroupOperations(cipherSuite: CipherSuite) -> Bool {
     print("Testing Advanced Group Operations...")
     
     do {
         let config = clientConfigDefault()
         
         // Set up clients
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "alice_advanced".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "bob_advanced".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
-        let charlieKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let charlieKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let charlieId = "charlie_advanced".data(using: .utf8)!
         let charlie = Client(id: charlieId, signatureKeypair: charlieKeypair, clientConfig: config)
         
@@ -66,12 +66,12 @@ func testAdvancedGroupOperations() -> Bool {
     }
 }
 
-func testGroupPersistenceWithLoad() -> Bool {
+func testGroupPersistenceWithLoad(cipherSuite: CipherSuite) -> Bool {
     print("Testing Group Persistence with Load...")
     
     do {
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "test_load_persistence".data(using: .utf8)!
         
         let alice = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
@@ -99,17 +99,17 @@ func testGroupPersistenceWithLoad() -> Bool {
     }
 }
 
-func testReceivedMessageTypes() -> Bool {
+func testReceivedMessageTypes(cipherSuite: CipherSuite) -> Bool {
     print("Testing ReceivedMessage Types...")
     
     do {
         let config = clientConfigDefault()
         
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "alice_message_types".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "bob_message_types".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
@@ -179,17 +179,17 @@ func testReceivedMessageTypes() -> Bool {
     }
 }
 
-func testSigningIdentityOperations() -> Bool {
+func testSigningIdentityOperations(cipherSuite: CipherSuite) -> Bool {
     print("Testing SigningIdentity Operations...")
     
     do {
         let config = clientConfigDefault()
         
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "alice_identity".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "bob_identity".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
@@ -224,12 +224,12 @@ func testSigningIdentityOperations() -> Bool {
 
 // MARK: - Error Handling & Storage Tests
 
-func testErrorHandling() -> Bool {
+func testErrorHandling(cipherSuite: CipherSuite) -> Bool {
     print("Testing Error Handling...")
     
     do {
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "error_test_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         
@@ -252,12 +252,12 @@ func testErrorHandling() -> Bool {
     }
 }
 
-func testGroupStateStorageOperations() -> Bool {
+func testGroupStateStorageOperations(cipherSuite: CipherSuite) -> Bool {
     print("Testing GroupStateStorage Operations...")
     
     do {
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "storage_test_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         
@@ -286,14 +286,13 @@ func testGroupStateStorageOperations() -> Bool {
     }
 }
 
-func testCipherSuiteSupport() -> Bool {
+func testCipherSuiteSupport(cipherSuite: CipherSuite) -> Bool {
     print("Testing CipherSuite Support...")
     
     do {
         let config = clientConfigDefault()
         
         // Test available cipher suite
-        let cipherSuite = CipherSuite.curve25519Aes128
         print("  Testing \(cipherSuite)...")
         
         // Generate keypair for this cipher suite
@@ -315,7 +314,7 @@ func testCipherSuiteSupport() -> Bool {
     }
 }
 
-func testMembershipOperations() -> Bool {
+func testMembershipOperations(cipherSuite: CipherSuite) -> Bool {
     print("Testing Membership Operations...")
     
     do {
@@ -323,7 +322,7 @@ func testMembershipOperations() -> Bool {
         
         // Set up multiple clients
         let clients = try (0..<4).map { i in
-            let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+            let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
             let clientId = "member_\(i)".data(using: .utf8)!
             return Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         }

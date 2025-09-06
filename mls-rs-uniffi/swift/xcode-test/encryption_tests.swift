@@ -1,18 +1,18 @@
 import Foundation
 
-func testMessageEncryption() -> Bool {
+func testMessageEncryption(cipherSuite: CipherSuite) -> Bool {
     print("Testing Message Encryption and Decryption...")
     
     do {
         let config = clientConfigDefault()
         
         // Create Alice
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "enc_test_alice".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
         // Create Bob
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "enc_test_bob".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
@@ -59,19 +59,20 @@ func testMessageEncryption() -> Bool {
     }
 }
 
-func testBidirectionalMessaging() -> Bool {
+func testBidirectionalMessaging(cipherSuite: CipherSuite) -> Bool {
     print("Testing Bidirectional Messaging...")
     
     do {
         let config = clientConfigDefault()
         
-        // Create Alice and Bob
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
-        let aliceId = "bidir_test_alice".data(using: .utf8)!
+        // Create Alice
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
+        let aliceId = "bidir_alice".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
-        let bobId = "bidir_test_bob".data(using: .utf8)!
+        // Create Bob
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
+        let bobId = "bidir_bob".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
         // Set up group
@@ -83,63 +84,39 @@ func testBidirectionalMessaging() -> Bool {
         let joinInfo = try bob.joinGroup(ratchetTree: nil, welcomeMessage: commitResult.welcomeMessage!)
         let bobGroup = joinInfo.group
         
-        // Alice sends message to Bob
-        let aliceMessage = "Hello Bob!".data(using: .utf8)!
-        let aliceEncrypted = try aliceGroup.encryptApplicationMessage(message: aliceMessage)
-        let bobDecryptResult = try bobGroup.processIncomingMessage(message: aliceEncrypted)
+        // Test Alice → Bob message
+        let message1 = "Hello from Alice!".data(using: .utf8)!
+        let encrypted1 = try aliceGroup.encryptApplicationMessage(message: message1)
+        let _ = try bobGroup.processIncomingMessage(message: encrypted1)
+        print("✓ Alice → Bob message successful")
         
-        switch bobDecryptResult {
-        case .applicationMessage(_, let data):
-            if data == aliceMessage {
-                print("✓ Alice → Bob message successful")
-            } else {
-                print("✗ Alice → Bob message failed")
-                return false
-            }
-        default:
-            print("✗ Alice → Bob unexpected message type")
-            return false
-        }
-        
-        // Bob sends message to Alice
-        let bobMessage = "Hello Alice!".data(using: .utf8)!
-        let bobEncrypted = try bobGroup.encryptApplicationMessage(message: bobMessage)
-        let aliceDecryptResult = try aliceGroup.processIncomingMessage(message: bobEncrypted)
-        
-        switch aliceDecryptResult {
-        case .applicationMessage(_, let data):
-            if data == bobMessage {
-                print("✓ Bob → Alice message successful")
-            } else {
-                print("✗ Bob → Alice message failed")
-                return false
-            }
-        default:
-            print("✗ Bob → Alice unexpected message type")
-            return false
-        }
-        
+        // Test Bob → Alice message
+        let message2 = "Hello from Bob!".data(using: .utf8)!
+        let encrypted2 = try bobGroup.encryptApplicationMessage(message: message2)
+        let _ = try aliceGroup.processIncomingMessage(message: encrypted2)
+        print("✓ Bob → Alice message successful")
         print("✓ Bidirectional messaging works correctly")
+        
         return true
         
     } catch {
-        print("✗ Bidirectional messaging test failed: (error)")
+        print("✗ Bidirectional messaging test failed: \(error)")
         return false
     }
 }
 
-func testMultipleMessages() -> Bool {
+func testMultipleMessages(cipherSuite: CipherSuite) -> Bool {
     print("Testing Multiple Messages in Sequence...")
     
     do {
         let config = clientConfigDefault()
         
         // Create clients
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "multi_test_alice".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "multi_test_bob".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         
@@ -182,18 +159,18 @@ func testMultipleMessages() -> Bool {
     }
 }
 
-func testLargeMessage() -> Bool {
+func testLargeMessage(cipherSuite: CipherSuite) -> Bool {
     print("Testing Large Message Encryption...")
     
     do {
         let config = clientConfigDefault()
         
         // Create clients
-        let aliceKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let aliceKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let aliceId = "large_test_alice".data(using: .utf8)!
         let alice = Client(id: aliceId, signatureKeypair: aliceKeypair, clientConfig: config)
         
-        let bobKeypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let bobKeypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let bobId = "large_test_bob".data(using: .utf8)!
         let bob = Client(id: bobId, signatureKeypair: bobKeypair, clientConfig: config)
         

@@ -1,6 +1,6 @@
 import Foundation
 
-func testClientBasics() -> Bool {
+func testClientBasics(cipherSuite: CipherSuite) -> Bool {
     print("Testing Client Creation and Basic Operations...")
     
     do {
@@ -8,8 +8,8 @@ func testClientBasics() -> Bool {
         let config = clientConfigDefault()
         print("✓ Client configuration created")
         
-        // Test 2: Signature keypair generation
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        // Test 2: Signature keypair generation with selected cipher suite
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         print("✓ Signature keypair generated")
         
         // Test 3: Client creation
@@ -32,18 +32,18 @@ func testClientBasics() -> Bool {
     }
 }
 
-func testClientWithDifferentCipherSuites() -> Bool {
+func testClientWithDifferentCipherSuites(cipherSuite: CipherSuite) -> Bool {
     print("Testing Client Creation with Different Cipher Suites...")
     
     let testCipherSuites: [CipherSuite] = [
-        .curve25519Aes128
+        cipherSuite  // Use the provided cipher suite
     ]
     
     let config = clientConfigDefault()
     
-    for (index, cipherSuite) in testCipherSuites.enumerated() {
+    for (index, testCipherSuite) in testCipherSuites.enumerated() {
         do {
-            let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
+            let keypair = try generateSignatureKeypair(cipherSuite: testCipherSuite)
             let clientId = "test_client_\(index)".data(using: .utf8)!
             let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
             
@@ -61,12 +61,12 @@ func testClientWithDifferentCipherSuites() -> Bool {
     return true
 }
 
-func testClientIdentity() -> Bool {
+func testClientIdentity(cipherSuite: CipherSuite) -> Bool {
     print("Testing Client Identity Operations...")
     
     do {
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         
         // Test with different client IDs
         let testIds = ["alice", "bob", "charlie", "test@example.com", "user123"]

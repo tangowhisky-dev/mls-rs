@@ -1,6 +1,6 @@
 import Foundation
 
-func testAdvancedAPIs() -> Bool {
+func testAdvancedAPIs(cipherSuite: CipherSuite) -> Bool {
     print("\n=== Testing Advanced APIs ===")
     var allTestsPassed = true
     
@@ -8,7 +8,7 @@ func testAdvancedAPIs() -> Bool {
     do {
         print("Testing group storage and load operations...")
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "advanced_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         
@@ -28,7 +28,7 @@ func testAdvancedAPIs() -> Bool {
     do {
         print("Testing exportTree...")
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "tree_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         let group = try client.createGroup(groupId: Data?.none)
@@ -46,8 +46,8 @@ func testAdvancedAPIs() -> Bool {
     do {
         print("Testing member operations...")
         let config = clientConfigDefault()
-        let keypair1 = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
-        let keypair2 = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair1 = try generateSignatureKeypair(cipherSuite: cipherSuite)
+        let keypair2 = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId1 = "client1".data(using: .utf8)!
         let clientId2 = "client2".data(using: .utf8)!
         let client1 = Client(id: clientId1, signatureKeypair: keypair1, clientConfig: config)
@@ -73,7 +73,7 @@ func testAdvancedAPIs() -> Bool {
     do {
         print("Testing group state operations...")
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "state_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         let group = try client.createGroup(groupId: Data?.none)
@@ -92,7 +92,7 @@ func testAdvancedAPIs() -> Bool {
     do {
         print("Testing multiple groups...")
         let config = clientConfigDefault()
-        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let keypair = try generateSignatureKeypair(cipherSuite: cipherSuite)
         let clientId = "multi_client".data(using: .utf8)!
         let client = Client(id: clientId, signatureKeypair: keypair, clientConfig: config)
         

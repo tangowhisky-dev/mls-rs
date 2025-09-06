@@ -1,5 +1,35 @@
 import Foundation
 
+// Global cipher suite configuration - will be set from command line
+var selectedCipherSuite: CipherSuite = .curve25519Aes128  // Default
+
+// Helper function to get cipher suite by ID
+func getCipherSuiteById(_ id: Int) -> CipherSuite {
+    switch id {
+    case 1: return .curve25519Aes128
+    case 2: return .p256Aes128
+    case 3: return .curve25519Chacha
+    case 4: return .curve448Aes256
+    case 5: return .p521Aes256
+    case 6: return .curve448Chacha
+    case 7: return .p384Aes256
+    default: return .curve25519Aes128
+    }
+}
+
+// Helper function to get cipher suite name
+func getCipherSuiteName(_ cipherSuite: CipherSuite) -> String {
+    switch cipherSuite {
+    case .curve25519Aes128: return "curve25519Aes128"
+    case .p256Aes128: return "p256Aes128"
+    case .curve25519Chacha: return "curve25519Chacha"
+    case .curve448Aes256: return "curve448Aes256"
+    case .p521Aes256: return "p521Aes256"
+    case .curve448Chacha: return "curve448Chacha"
+    case .p384Aes256: return "p384Aes256"
+    }
+}
+
 // Helper extension for result validation
 extension String {
     func repeating(_ count: Int) -> String {
@@ -8,7 +38,16 @@ extension String {
 }
 
 func runTests() {
+    // Parse command line arguments
+    let cipherSuiteId = CommandLine.arguments.count > 1 ? Int(CommandLine.arguments[1]) ?? 1 : 1
+    
+    // Set global cipher suite selection
+    selectedCipherSuite = getCipherSuiteById(cipherSuiteId)
+    let cipherSuiteName = getCipherSuiteName(selectedCipherSuite)
+    
     print("🧪 MLS Swift Bindings Test - Comprehensive Edition")
+    print("==================================================")
+    print("🎯 Running tests with cipher suite: \(cipherSuiteName) (ID: \(cipherSuiteId))")
     print("==================================================")
     
     var testsPassed = 0
@@ -23,9 +62,9 @@ func runTests() {
     
     // Test 2: Signature keypair generation
     testsTotal += 1
-    print("\n2. Testing generateSignatureKeypair()...")
+    print("\n2. Testing generateSignatureKeypair() with \(cipherSuiteName)...")
     do {
-        _ = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        _ = try generateSignatureKeypair(cipherSuite: selectedCipherSuite)
         print("   ✅ Signature keypair generated successfully")
         testsPassed += 1
     } catch {
@@ -36,7 +75,7 @@ func runTests() {
     // Test 3: Client Tests
     testsTotal += 1
     print("\n3. Running Client Tests...")
-    if testClientBasics() && testClientWithDifferentCipherSuites() && testClientIdentity() {
+    if testClientBasics(cipherSuite: selectedCipherSuite) && testClientWithDifferentCipherSuites(cipherSuite: selectedCipherSuite) && testClientIdentity(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ All client tests passed")
     } else {
@@ -46,7 +85,7 @@ func runTests() {
     // Test 4: Group Tests
     testsTotal += 1
     print("\n4. Running Group Tests...")
-    if testGroupCreation() && testGroupMembership() && testGroupProposals() && testGroupPersistence() {
+    if testGroupCreation(cipherSuite: selectedCipherSuite) && testGroupMembership(cipherSuite: selectedCipherSuite) && testGroupProposals(cipherSuite: selectedCipherSuite) && testGroupPersistence(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ All group tests passed")
     } else {
@@ -56,7 +95,7 @@ func runTests() {
     // Test 5: Encryption Tests
     testsTotal += 1
     print("\n5. Running Encryption Tests...")
-    if testMessageEncryption() && testBidirectionalMessaging() && testMultipleMessages() && testLargeMessage() {
+    if testMessageEncryption(cipherSuite: selectedCipherSuite) && testBidirectionalMessaging(cipherSuite: selectedCipherSuite) && testMultipleMessages(cipherSuite: selectedCipherSuite) && testLargeMessage(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ All encryption tests passed")
     } else {
@@ -66,7 +105,7 @@ func runTests() {
     // Test 6: Advanced API Tests  
     testsTotal += 1
     print("\n6. Running Advanced API Tests...")
-    if testAdvancedAPIs() {
+    if testAdvancedAPIs(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ All advanced API tests passed")
     } else {
@@ -76,7 +115,7 @@ func runTests() {
     // Test 7: Error Handling & Storage Tests
     testsTotal += 1
     print("\n7. Running Error Handling & Storage Tests...")
-    if testErrorHandlingAndStorage() {
+    if testErrorHandlingAndStorage(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ All error handling & storage tests passed")
     } else {
@@ -86,7 +125,7 @@ func runTests() {
     // Test 8: GroupStateStorage API Tests
     testsTotal += 1
     print("\n8. Running GroupStateStorage API Tests...")
-    if testGroupStateStorageAPIs() && testExtensionAndMessageWrappers() {
+    if testGroupStateStorageAPIs(cipherSuite: selectedCipherSuite) && testExtensionAndMessageWrappers(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ All GroupStateStorage API tests passed")
     } else {
@@ -96,7 +135,7 @@ func runTests() {
     // Test 9: Comprehensive API Tests (Previously Missing!)
     testsTotal += 1
     print("\n9. Running Comprehensive API Tests...")
-    if testAdvancedGroupOperations() && testGroupPersistenceWithLoad() && testReceivedMessageTypes() && testSigningIdentityOperations() {
+    if testAdvancedGroupOperations(cipherSuite: selectedCipherSuite) && testGroupPersistenceWithLoad(cipherSuite: selectedCipherSuite) && testReceivedMessageTypes(cipherSuite: selectedCipherSuite) && testSigningIdentityOperations(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ All comprehensive API tests passed")
     } else {
@@ -106,7 +145,7 @@ func runTests() {
     // Test 10: Additional Error Handling & Storage Tests
     testsTotal += 1
     print("\n10. Running Additional Error Handling & Storage Tests...")
-    if testErrorHandling() && testGroupStateStorageOperations() && testCipherSuiteSupport() && testMembershipOperations() {
+    if testErrorHandling(cipherSuite: selectedCipherSuite) && testGroupStateStorageOperations(cipherSuite: selectedCipherSuite) && testCipherSuiteSupport(cipherSuite: selectedCipherSuite) && testMembershipOperations(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ All additional tests passed")
     } else {
@@ -116,7 +155,7 @@ func runTests() {
     // Test 11: Cipher Suite Analysis
     testsTotal += 1
     print("\n11. Running Cipher Suite Analysis...")
-    if analyzeCipherSuiteSupport() && testCipherSuiteConversion() {
+    if analyzeCipherSuiteSupport(cipherSuite: selectedCipherSuite) && testCipherSuiteConversion(cipherSuite: selectedCipherSuite) {
         testsPassed += 1
         print("   ✅ Cipher suite analysis completed")
     } else {

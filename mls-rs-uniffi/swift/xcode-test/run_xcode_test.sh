@@ -2,11 +2,47 @@
 
 # Xcode Command Line Test for MLS Swift Bindings
 # This script compiles and runs a Swift test program using Xcode's tools
+# Usage: ./run_xcode_test.sh [cipher_suite_id]
+#   cipher_suite_id: 1-7 (default: 1)
+#   1 = curve25519Aes128    2 = p256Aes128       3 = curve25519Chacha
+#   4 = curve448Aes256      5 = p521Aes256       6 = curve448Chacha
+#   7 = p384Aes256
 
 set -e
 
+# Parse command line arguments
+CIPHER_SUITE_ID=${1:-1}
+
+# Validate cipher suite ID
+if ! [[ "$CIPHER_SUITE_ID" =~ ^[1-7]$ ]]; then
+    echo "❌ Invalid cipher suite ID: $CIPHER_SUITE_ID"
+    echo "📋 Valid cipher suite IDs:"
+    echo "   1 = curve25519Aes128 (default)"
+    echo "   2 = p256Aes128"
+    echo "   3 = curve25519Chacha" 
+    echo "   4 = curve448Aes256"
+    echo "   5 = p521Aes256"
+    echo "   6 = curve448Chacha"
+    echo "   7 = p384Aes256"
+    echo ""
+    echo "Usage: $0 [1-7]"
+    exit 1
+fi
+
+# Map cipher suite ID to name
+case "$CIPHER_SUITE_ID" in
+    1) CIPHER_SUITE_NAME="curve25519Aes128" ;;
+    2) CIPHER_SUITE_NAME="p256Aes128" ;;
+    3) CIPHER_SUITE_NAME="curve25519Chacha" ;;
+    4) CIPHER_SUITE_NAME="curve448Aes256" ;;
+    5) CIPHER_SUITE_NAME="p521Aes256" ;;
+    6) CIPHER_SUITE_NAME="curve448Chacha" ;;
+    7) CIPHER_SUITE_NAME="p384Aes256" ;;
+esac
+
 echo "🔨 Xcode Command Line Test for MLS Swift Bindings"
 echo "=================================================="
+echo "🎯 Testing with Cipher Suite: $CIPHER_SUITE_NAME (ID: $CIPHER_SUITE_ID)"
 
 # Get the directory of this script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -108,9 +144,9 @@ echo "==============================="
 # Set the library path so the executable can find the dynamic library
 export DYLD_LIBRARY_PATH=".:${DYLD_LIBRARY_PATH:-}"
 
-# Run the test
+# Run the test with cipher suite ID as argument
 set +e
-./mls_test
+./mls_test "$CIPHER_SUITE_ID"
 TEST_EXIT_CODE=$?
 set -e
 
