@@ -2277,9 +2277,29 @@ public enum CipherSuite {
      */
     case curve25519Aes128
     /**
+     * MLS_128_DHKEMP256_AES128GCM_SHA256_P256 (ID: 2)
+     */
+    case p256Aes128
+    /**
+     * MLS_128_DHKEMX25519_CHACHA20POLY1305_SHA256_Ed25519 (ID: 3)
+     */
+    case curve25519Chacha
+    /**
+     * MLS_256_DHKEMX448_AES256GCM_SHA512_Ed448 (ID: 4)
+     */
+    case curve448Aes256
+    /**
      * MLS_256_DHKEMP521_AES256GCM_SHA512_P521 (ID: 5)
      */
     case p521Aes256
+    /**
+     * MLS_256_DHKEMX448_CHACHA20POLY1305_SHA512_Ed448 (ID: 6)
+     */
+    case curve448Chacha
+    /**
+     * MLS_256_DHKEMP384_AES256GCM_SHA384_P384 (ID: 7)
+     */
+    case p384Aes256
 }
 
 
@@ -2292,7 +2312,17 @@ public struct FfiConverterTypeCipherSuite: FfiConverterRustBuffer {
         
         case 1: return .curve25519Aes128
         
-        case 2: return .p521Aes256
+        case 2: return .p256Aes128
+        
+        case 3: return .curve25519Chacha
+        
+        case 4: return .curve448Aes256
+        
+        case 5: return .p521Aes256
+        
+        case 6: return .curve448Chacha
+        
+        case 7: return .p384Aes256
         
         default: throw UniffiInternalError.unexpectedEnumCase
         }
@@ -2306,8 +2336,28 @@ public struct FfiConverterTypeCipherSuite: FfiConverterRustBuffer {
             writeInt(&buf, Int32(1))
         
         
-        case .p521Aes256:
+        case .p256Aes128:
             writeInt(&buf, Int32(2))
+        
+        
+        case .curve25519Chacha:
+            writeInt(&buf, Int32(3))
+        
+        
+        case .curve448Aes256:
+            writeInt(&buf, Int32(4))
+        
+        
+        case .p521Aes256:
+            writeInt(&buf, Int32(5))
+        
+        
+        case .curve448Chacha:
+            writeInt(&buf, Int32(6))
+        
+        
+        case .p384Aes256:
+            writeInt(&buf, Int32(7))
         
         }
     }

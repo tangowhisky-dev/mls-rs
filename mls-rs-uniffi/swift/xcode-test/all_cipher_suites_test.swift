@@ -1,185 +1,5 @@
 import Foundation
 
-// Helper extension for result validation
-extension String {
-    func repeating(_ count: Int) -> String {
-        return String(repeating: self, count: count)
-    }
-}
-
-func runTests() {
-    print("🧪 MLS Swift Bindings Test - Comprehensive Edition")
-    print("==================================================")
-    
-    var testsPassed = 0
-    var testsTotal = 0
-    
-    // Test 1: Client Configuration
-    testsTotal += 1
-    print("\n1. Testing clientConfigDefault()...")
-    _ = clientConfigDefault()
-    print("   ✅ Client config created successfully")
-    testsPassed += 1
-    
-    // Test 2: Signature keypair generation
-    testsTotal += 1
-    print("\n2. Testing generateSignatureKeypair()...")
-    do {
-        _ = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
-        print("   ✅ Signature keypair generated successfully")
-        testsPassed += 1
-    } catch {
-        print("   ❌ FAILED - \(error)")
-        exit(1)
-    }
-    
-    // Test 3: Client Tests
-    testsTotal += 1
-    print("\n3. Running Client Tests...")
-    if testClientBasics() && testClientWithDifferentCipherSuites() && testClientIdentity() {
-        testsPassed += 1
-        print("   ✅ All client tests passed")
-    } else {
-        print("   ❌ Client tests failed")
-    }
-    
-    // Test 4: Group Tests
-    testsTotal += 1
-    print("\n4. Running Group Tests...")
-    if testGroupCreation() && testGroupMembership() && testGroupProposals() && testGroupPersistence() {
-        testsPassed += 1
-        print("   ✅ All group tests passed")
-    } else {
-        print("   ❌ Group tests failed")
-    }
-    
-    // Test 5: Encryption Tests
-    testsTotal += 1
-    print("\n5. Running Encryption Tests...")
-    if testMessageEncryption() && testBidirectionalMessaging() && testMultipleMessages() && testLargeMessage() {
-        testsPassed += 1
-        print("   ✅ All encryption tests passed")
-    } else {
-        print("   ❌ Encryption tests failed")
-    }
-    
-    // Test 6: Advanced API Tests  
-    testsTotal += 1
-    print("\n6. Running Advanced API Tests...")
-    if testAdvancedAPIs() {
-        testsPassed += 1
-        print("   ✅ All advanced API tests passed")
-    } else {
-        print("   ❌ Advanced API tests failed")
-    }
-    
-    // Test 7: Error Handling & Storage Tests
-    testsTotal += 1
-    print("\n7. Running Error Handling & Storage Tests...")
-    if testErrorHandlingAndStorage() {
-        testsPassed += 1
-        print("   ✅ All error handling & storage tests passed")
-    } else {
-        print("   ❌ Error handling & storage tests failed")
-    }
-    
-    // Test 8: GroupStateStorage API Tests
-    testsTotal += 1
-    print("\n8. Running GroupStateStorage API Tests...")
-    if testGroupStateStorageAPIs() && testExtensionAndMessageWrappers() {
-        testsPassed += 1
-        print("   ✅ All GroupStateStorage API tests passed")
-    } else {
-        print("   ❌ GroupStateStorage API tests failed")
-    }
-    
-    // Test 9: Comprehensive API Tests (Previously Missing!)
-    testsTotal += 1
-    print("\n9. Running Comprehensive API Tests...")
-    if testAdvancedGroupOperations() && testGroupPersistenceWithLoad() && testReceivedMessageTypes() && testSigningIdentityOperations() {
-        testsPassed += 1
-        print("   ✅ All comprehensive API tests passed")
-    } else {
-        print("   ❌ Comprehensive API tests failed")
-    }
-    
-    // Test 10: Additional Error Handling & Storage Tests
-    testsTotal += 1
-    print("\n10. Running Additional Error Handling & Storage Tests...")
-    if testErrorHandling() && testGroupStateStorageOperations() && testCipherSuiteSupport() && testMembershipOperations() {
-        testsPassed += 1
-        print("   ✅ All additional tests passed")
-    } else {
-        print("   ❌ Additional tests failed")
-    }
-    
-    // Test 11: Cipher Suite Analysis
-    testsTotal += 1
-    print("\n11. Running Cipher Suite Analysis...")
-    if analyzeCipherSuiteSupport() && testCipherSuiteConversion() {
-        testsPassed += 1
-        print("   ✅ Cipher suite analysis completed")
-    } else {
-        print("   ❌ Cipher suite analysis failed")
-    }
-    
-    // Test 12: P521Aes256 Cipher Suite
-    testsTotal += 1
-    print("\n12. Testing P521Aes256 Cipher Suite...")
-    if testP521Aes256CipherSuite() && testP521VsCurve25519Comparison() && testP521EnterpriseScenario() {
-        testsPassed += 1
-        print("   ✅ All P521Aes256 tests passed")
-    } else {
-        print("   ❌ P521Aes256 tests failed")
-    }
-    
-    // Test 13: All 7 Standard Cipher Suites
-    testsTotal += 1
-    print("\n13. Testing All 7 Standard MLS Cipher Suites...")
-    if testAllCipherSuites() {
-        testsPassed += 1
-        print("   ✅ All 7 cipher suites work correctly")
-    } else {
-        print("   ❌ Some cipher suites failed")
-    }
-    
-    // Test 14: Enterprise Cipher Suite Categories  
-    testsTotal += 1
-    print("\n14. Testing Enterprise Cipher Suite Categories...")
-    if testEnterpriseStandardCipherSuites() && testMobileOptimizedCipherSuites() && testHighSecurityCipherSuites() {
-        testsPassed += 1
-        print("   ✅ All enterprise categories passed")
-    } else {
-        print("   ❌ Enterprise categories failed")
-    }
-    
-    // Test 15: Cipher Suite Interoperability
-    testsTotal += 1
-    print("\n15. Testing Cipher Suite Interoperability...")
-    if testCipherSuiteInteroperability() {
-        testsPassed += 1
-        print("   ✅ Cipher suite interoperability works")
-    } else {
-        print("   ❌ Cipher suite interoperability failed")
-    }
-    
-    // Final results
-    print("\n" + "=".repeating(50))
-    print("TEST SUMMARY")
-    print("=".repeating(50))
-    print("Total tests: \(testsTotal)")
-    print("Passed: \(testsPassed)")
-    print("Failed: \(testsTotal - testsPassed)")
-    
-    if testsPassed == testsTotal {
-        print("\n🎉 ALL TESTS PASSED!")
-        print("MLS Swift bindings are working correctly!")
-    } else {
-        print("\n❌ SOME TESTS FAILED!")
-        exit(1)
-    }
-}
-
 // Test all 7 standard MLS cipher suites
 func testAllCipherSuites() -> Bool {
     print("🔐 Testing All 7 Standard MLS Cipher Suites...")
@@ -379,5 +199,144 @@ func testCipherSuiteInteroperability() -> Bool {
     }
 }
 
-// Main execution
-runTests()
+// Legacy P521-specific tests (kept for backward compatibility)
+func testP521Aes256CipherSuite() -> Bool {
+    print("🔐 Testing P521Aes256 Cipher Suite...")
+    
+    do {
+        // Test 1: Key generation with P521Aes256
+        print("  1. Testing key generation...")
+        let p521Keypair = try generateSignatureKeypair(cipherSuite: .p521Aes256)
+        print("    ✅ P521 key generation successful")
+        
+        // Test 2: Client creation with P521Aes256
+        print("  2. Testing client creation...")
+        let config = clientConfigDefault()
+        let clientId = "p521_test_client".data(using: .utf8)!
+        let client = Client(
+            id: clientId,
+            signatureKeypair: p521Keypair,
+            clientConfig: config
+        )
+        print("    ✅ P521 client creation successful")
+        
+        // Test 3: Group creation with P521Aes256
+        print("  3. Testing group creation...")
+        let groupId = "p521_test_group".data(using: .utf8)
+        let _ = try client.createGroup(groupId: groupId)
+        print("    ✅ P521 group creation successful")
+        
+        // Test 4: Key package generation with P521Aes256
+        print("  4. Testing key package generation...")
+        let _ = try client.generateKeyPackageMessage()
+        print("    ✅ P521 key package generation successful")
+        
+        // Test 5: Verify cipher suite consistency
+        print("  5. Testing cipher suite consistency...")
+        if p521Keypair.cipherSuite == .p521Aes256 {
+            print("    ✅ P521 cipher suite consistency verified")
+        } else {
+            print("    ❌ P521 cipher suite mismatch")
+            return false
+        }
+        
+        print("✅ All P521Aes256 tests passed successfully!")
+        return true
+        
+    } catch {
+        print("❌ P521Aes256 test failed: \(error)")
+        return false
+    }
+}
+
+func testP521VsCurve25519Comparison() -> Bool {
+    print("🔍 Testing P521 vs Curve25519 comparison...")
+    
+    do {
+        // Generate keypairs for both cipher suites
+        let p521Keypair = try generateSignatureKeypair(cipherSuite: .p521Aes256)
+        let curve25519Keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        
+        // Verify they have different cipher suites
+        if p521Keypair.cipherSuite != curve25519Keypair.cipherSuite {
+            print("  ✅ P521 and Curve25519 have different cipher suites as expected")
+        } else {
+            print("  ❌ P521 and Curve25519 cipher suites should be different")
+            return false
+        }
+        
+        // Verify specific cipher suite values
+        if p521Keypair.cipherSuite == .p521Aes256 && 
+           curve25519Keypair.cipherSuite == .curve25519Aes128 {
+            print("  ✅ Cipher suite values are correct")
+        } else {
+            print("  ❌ Cipher suite values are incorrect")
+            return false
+        }
+        
+        // Test that both can create clients successfully
+        let config = clientConfigDefault()
+        
+        let p521Client = Client(
+            id: "p521_client".data(using: .utf8)!,
+            signatureKeypair: p521Keypair,
+            clientConfig: config
+        )
+        
+        let curve25519Client = Client(
+            id: "curve25519_client".data(using: .utf8)!,
+            signatureKeypair: curve25519Keypair,
+            clientConfig: config
+        )
+        
+        // Both should be able to create groups
+        let groupId: Data? = nil
+        let _ = try p521Client.createGroup(groupId: groupId)
+        let _ = try curve25519Client.createGroup(groupId: groupId)
+        
+        print("✅ P521 vs Curve25519 comparison test passed!")
+        return true
+        
+    } catch {
+        print("❌ P521 vs Curve25519 comparison test failed: \(error)")
+        return false
+    }
+}
+
+func testP521EnterpriseScenario() -> Bool {
+    print("🏢 Testing P521 Enterprise Scenario...")
+    
+    do {
+        // Create multiple P521 clients (simulating enterprise deployment)
+        let config = clientConfigDefault()
+        var clients: [Client] = []
+        
+        for i in 1...3 {
+            let keypair = try generateSignatureKeypair(cipherSuite: .p521Aes256)
+            let clientId = "enterprise_user_\(i)".data(using: .utf8)!
+            let client = Client(
+                id: clientId,
+                signatureKeypair: keypair,
+                clientConfig: config
+            )
+            clients.append(client)
+        }
+        
+        // First client creates a group
+        let _ = try clients[0].createGroup(groupId: "enterprise_group".data(using: .utf8))
+        print("  ✅ Enterprise group created with P521")
+        
+        // Generate key packages for other clients
+        for i in 1..<clients.count {
+            let _ = try clients[i].generateKeyPackageMessage()
+        }
+        print("  ✅ Enterprise key packages generated with P521")
+        
+        print("✅ P521 Enterprise scenario test passed!")
+        return true
+        
+    } catch {
+        print("❌ P521 Enterprise scenario test failed: \(error)")
+        return false
+    }
+}
