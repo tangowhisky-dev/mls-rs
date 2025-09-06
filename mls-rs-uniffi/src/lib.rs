@@ -275,14 +275,17 @@ pub enum ReceivedMessage {
 /// [`mls_rs::CipherSuite`].
 #[derive(Copy, Clone, Debug, uniffi::Enum)]
 pub enum CipherSuite {
-    // TODO(mgeisler): add more cipher suites.
+    /// MLS_128_DHKEMX25519_AES128GCM_SHA256_Ed25519 (ID: 1)
     Curve25519Aes128,
+    /// MLS_256_DHKEMP521_AES256GCM_SHA512_P521 (ID: 5)
+    P521Aes256,
 }
 
 impl From<CipherSuite> for mls_rs::CipherSuite {
     fn from(cipher_suite: CipherSuite) -> mls_rs::CipherSuite {
         match cipher_suite {
             CipherSuite::Curve25519Aes128 => mls_rs::CipherSuite::CURVE25519_AES128,
+            CipherSuite::P521Aes256 => mls_rs::CipherSuite::P521_AES256,
         }
     }
 }
@@ -293,6 +296,7 @@ impl TryFrom<mls_rs::CipherSuite> for CipherSuite {
     fn try_from(cipher_suite: mls_rs::CipherSuite) -> Result<Self, Self::Error> {
         match cipher_suite {
             mls_rs::CipherSuite::CURVE25519_AES128 => Ok(CipherSuite::Curve25519Aes128),
+            mls_rs::CipherSuite::P521_AES256 => Ok(CipherSuite::P521Aes256),
             _ => Err(MlsError::UnsupportedCipherSuite(cipher_suite))?,
         }
     }

@@ -113,6 +113,26 @@ func runTests() {
         print("   ❌ Additional tests failed")
     }
     
+    // Test 11: Cipher Suite Analysis
+    testsTotal += 1
+    print("\n11. Running Cipher Suite Analysis...")
+    if analyzeCipherSuiteSupport() && testCipherSuiteConversion() {
+        testsPassed += 1
+        print("   ✅ Cipher suite analysis completed")
+    } else {
+        print("   ❌ Cipher suite analysis failed")
+    }
+    
+    // Test 12: P521Aes256 Cipher Suite
+    testsTotal += 1
+    print("\n12. Testing P521Aes256 Cipher Suite...")
+    if testP521Aes256CipherSuite() && testP521VsCurve25519Comparison() && testP521EnterpriseScenario() {
+        testsPassed += 1
+        print("   ✅ All P521Aes256 tests passed")
+    } else {
+        print("   ❌ P521Aes256 tests failed")
+    }
+    
     // Final results
     print("\n" + "=".repeating(50))
     print("TEST SUMMARY")

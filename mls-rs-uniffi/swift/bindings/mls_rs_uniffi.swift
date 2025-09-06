@@ -2272,7 +2272,14 @@ public func FfiConverterTypeSignatureSecretKey_lower(_ value: SignatureSecretKey
 
 public enum CipherSuite {
     
+    /**
+     * MLS_128_DHKEMX25519_AES128GCM_SHA256_Ed25519 (ID: 1)
+     */
     case curve25519Aes128
+    /**
+     * MLS_256_DHKEMP521_AES256GCM_SHA512_P521 (ID: 5)
+     */
+    case p521Aes256
 }
 
 
@@ -2285,6 +2292,8 @@ public struct FfiConverterTypeCipherSuite: FfiConverterRustBuffer {
         
         case 1: return .curve25519Aes128
         
+        case 2: return .p521Aes256
+        
         default: throw UniffiInternalError.unexpectedEnumCase
         }
     }
@@ -2295,6 +2304,10 @@ public struct FfiConverterTypeCipherSuite: FfiConverterRustBuffer {
         
         case .curve25519Aes128:
             writeInt(&buf, Int32(1))
+        
+        
+        case .p521Aes256:
+            writeInt(&buf, Int32(2))
         
         }
     }

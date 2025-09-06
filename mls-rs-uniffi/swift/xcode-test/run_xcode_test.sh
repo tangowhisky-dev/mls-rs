@@ -74,6 +74,8 @@ cp "$SCRIPT_DIR/comprehensive_api_tests.swift" "$TEMP_DIR/"
 cp "$SCRIPT_DIR/advanced_tests.swift" "$TEMP_DIR/"
 cp "$SCRIPT_DIR/error_and_storage_tests.swift" "$TEMP_DIR/"
 cp "$SCRIPT_DIR/groupstate_storage_tests.swift" "$TEMP_DIR/"
+cp "$SCRIPT_DIR/cipher_suite_analysis.swift" "$TEMP_DIR/"
+cp "$SCRIPT_DIR/p521_cipher_suite_test.swift" "$TEMP_DIR/"
 cp "$DYLIB_PATH" "$TEMP_DIR/libmls_rs_uniffi.dylib"
 
 # Fix the Swift Error naming conflict in the generated bindings
@@ -94,7 +96,7 @@ swiftc -o mls_test \
     -L . \
     -lmls_rs_uniffi \
     -import-objc-header mls_rs_uniffiFFI.h \
-    mls_rs_uniffi.swift main.swift client_tests.swift group_tests.swift encryption_tests.swift comprehensive_api_tests.swift advanced_tests.swift error_and_storage_tests.swift groupstate_storage_tests.swift
+    mls_rs_uniffi.swift main.swift client_tests.swift group_tests.swift encryption_tests.swift comprehensive_api_tests.swift advanced_tests.swift error_and_storage_tests.swift groupstate_storage_tests.swift cipher_suite_analysis.swift p521_cipher_suite_test.swift
 
 echo "✅ Compilation successful!"
 
