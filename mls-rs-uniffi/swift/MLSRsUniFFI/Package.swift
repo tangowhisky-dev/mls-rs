@@ -14,9 +14,29 @@ let package = Package(
         ),
     ],
     targets: [
+        .binaryTarget(
+            name: "MLSRsUniFFIBinaries",
+            path: "Artifacts/MLSRsUniFFI.xcframework"
+        ),
+        .target(
+            name: "FFI",
+            path: "Sources/FFI",
+            publicHeadersPath: "include",
+            cSettings: [
+                .unsafeFlags(["-fmodules"])
+            ]
+        ),
         .target(
             name: "MLSRsUniFFI",
-            dependencies: []
+            dependencies: [
+                "FFI",
+                .target(name: "MLSRsUniFFIBinaries")
+            ],
+            path: "Sources/MLSRsUniFFI",
+            linkerSettings: [
+                .linkedLibrary("c++"),
+                .linkedLibrary("z")
+            ]
         ),
     ]
 )

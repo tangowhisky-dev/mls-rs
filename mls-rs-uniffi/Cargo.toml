@@ -11,7 +11,7 @@ license = "Apache-2.0 OR MIT"
 rust-version = "1.68.2"
 
 [lib]
-crate-type = ["lib", "cdylib"]
+crate-type = ["lib", "cdylib", "staticlib"]
 name = "mls_rs_uniffi"
 
 [dependencies]
