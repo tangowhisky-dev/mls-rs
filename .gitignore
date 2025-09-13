@@ -11,3 +11,5 @@ rust-toolchain.toml
 /mls-rs-uniffi/kotlin/tests/.gradle
 mls-rs-uniffi/kotlin/bindings/libmls_rs_uniffi.dylib
 /mls-rs-uniffi/kotlin/tests/src/main/resources
+/mls-rs-uniffi/swift/MLSRsUniFFI/.build
+mls-rs-uniffi/swift/bindings/libmls_rs_uniffi.dylib

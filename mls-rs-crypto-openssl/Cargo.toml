@@ -10,6 +10,7 @@ license = "Apache-2.0 OR MIT"
 
 [features]
 x509 = ["mls-rs-identity-x509"]
+vendored = ["openssl/vendored"]
 default = ["x509"]
 
 [dependencies]
