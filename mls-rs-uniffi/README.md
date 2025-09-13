@@ -331,28 +331,126 @@ do {
 ```
 
 ## Integration in iOS/macOS Projects
+The Swift bindings are packaged automatically by `generate_swift_bindings.sh` as a **local Swift Package** wrapping an **XCFramework** (static libraries for iOS device + simulator). Follow the steps below depending on your workflow.
 
-### Using Swift Package Manager
+### 1. Generate / Regenerate the Package
 
-Add this to your `Package.swift`:
+From the `mls-rs-uniffi` directory:
+
+```bash
+./generate_swift_bindings.sh            # Debug (default)
+./generate_swift_bindings.sh --release  # Optimized
+```
+
+This script produces (paths relative to `mls-rs-uniffi`):
+
+```
+swift/MLSRsUniFFI/
+ ├── Package.swift
+ ├── Artifacts/
+ │    └── MLSRsUniFFI.xcframework   # arm64 iOS + arm64 iOS Simulator static slices
+ └── Sources/
+      ├── FFI/                      # C module surface (headers + modulemap + placeholder)
+      │    ├── include/
+      │    │    ├── mls_rs_uniffiFFI.h
+      │    │    └── module.modulemap
+      │    └── ffi_placeholder.c
+      └── MLSRsUniFFI/
+           └── mls_rs_uniffi.swift  # Generated higher-level Swift API
+```
+
+### 2. Add the Package to Your App (Xcode GUI)
+1. Xcode > File > Add Packages…
+2. Click “Add Local…” (bottom-left) and select: `mls-rs-uniffi/swift/MLSRsUniFFI`
+3. Add the library product (usually `MLSRsUniFFI`) to your app target.
+4. Build – the XCFramework will be linked automatically; no manual `.dylib` steps required.
+
+### 3. Or Add via Your App’s `Package.swift`
+If your app itself uses SPM:
 
 ```swift
+// In your Package.swift
 dependencies: [
-    .package(path: "path/to/mls-rs-uniffi/swift")
+    .package(path: "../relative/path/to/mls-rs-uniffi/swift/MLSRsUniFFI")
 ],
 targets: [
     .target(
-        name: "YourTarget",
-        dependencies: ["MLSSwiftBindings"]
+        name: "YourAppModule",
+        dependencies: ["MLSRsUniFFI"]
     )
 ]
 ```
 
-### Using Xcode
+### 4. Import & Use in Code
 
-1. Drag the `swift` folder into your Xcode project
-2. Make sure the `.dylib` file is included in your app bundle
-3. Import the module in your Swift files
+```swift
+import MLSRsUniFFI
+
+let config = clientConfigDefault()
+let sig = try generateSignatureKeypair(cipherSuite: .p256Aes128)
+let clientId = "alice".data(using: .utf8)!
+let client = Client(id: clientId, signatureKeypair: sig, clientConfig: config)
+let group = try client.createGroup(groupId: nil)
+try group.writeToStorage()
+```
+
+### 5. Regenerating After Rust Changes
+Whenever you change the Rust interface (`.udl` file or exported functions):
+```bash
+cd mls-rs-uniffi
+./generate_swift_bindings.sh        # or --release
+open YourApp.xcodeproj              # Then: Product > Clean Build Folder
+```
+
+Xcode will detect modifications in the local package automatically. If it does not:
+1. Right-click the package in the Project Navigator > “Delete” (Remove Reference)
+2. Re-add it via “Add Packages…” > “Add Local…”
+3. Clean (Shift+Cmd+K) and rebuild.
+
+### 6. Logging & Debugging
+All sample/test code should use your app’s logging facility. Replace any leftover `print()` calls with a structured logger (e.g., `CustomLogger.logInfo(...)`). The generation script already patches known UniFFI `Error` extension conflicts.
+
+### 7. Supported Apple Platforms
+- iOS (device + simulator, arm64)
+- macOS (add macOS slice support by extending the script: build `aarch64-apple-darwin` & `x86_64-apple-darwin`, then add them to `xcodebuild -create-xcframework`)
+
+### 8. Common Troubleshooting
+| Symptom | Cause | Fix |
+|--------|-------|-----|
+| `No such module 'MLSRsUniFFI'` | Package not added or stale build cache | Re-add local package, Clean Build Folder |
+| Module redefinition error | Duplicate `module.modulemap` (e.g., embedding headers in XCFramework + Sources/FFI) | Ensure XCFramework is created **without** `-headers` (current script already does this) |
+| Missing `FFI.o` / build input | C target only had headers | Keep `ffi_placeholder.c` (do not remove) |
+| Linker errors: `-lc++` or `-lz` missing | Linker flags not propagated | Confirm `linkerSettings` in `Package.swift` of generated package |
+| Need Intel simulator support | Only arm64 slice present | Add `x86_64-apple-ios-sim` build in script and include in XCFramework |
+
+### 9. Extending the Script (Optional)
+- Add macOS: build & include macOS static libraries.
+- Add Catalyst: add `--target x86_64-apple-ios-macabi` if required.
+- Sign/Notarize: wrap the XCFramework in a signed archive for distribution.
+
+### 10. Distribution
+For internal teams, commit the generated `MLSRsUniFFI` directory (or publish to a private Git repo) and reference via URL instead of local path. Regenerate only when Rust API changes.
+
+### 11. Minimal Smoke Test
+After adding the package, place this in a temporary Swift file and run once:
+```swift
+import MLSRsUniFFI
+
+func mlsSmokeTest() {
+    do {
+        let config = clientConfigDefault()
+        let keypair = try generateSignatureKeypair(cipherSuite: .curve25519Aes128)
+        let cid = "smoke_user".data(using: .utf8)!
+        let client = Client(id: cid, signatureKeypair: keypair, clientConfig: config)
+        let group = try client.createGroup(groupId: nil)
+        try group.writeToStorage()
+        print("MLS smoke test OK: epoch=\(group.epoch())")
+    } catch {
+        print("MLS smoke test FAILED: \(error)")
+    }
+}
+```
+Replace the `print` calls with your logger if integrating into production code.
 
 ## Threading and Async Support
 
