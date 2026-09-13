@@ -115,6 +115,7 @@ impl RustCryptoProvider {
         vec![
             CipherSuite::P256_AES128,
             CipherSuite::P384_AES256,
+            CipherSuite::P521_AES256,
             CipherSuite::CURVE25519_AES128,
             CipherSuite::CURVE25519_CHACHA,
         ]

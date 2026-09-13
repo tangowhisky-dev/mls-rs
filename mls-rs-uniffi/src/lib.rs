@@ -17,12 +17,12 @@
 //!
 //! [UniFFI]: https://mozilla.github.io/uniffi-rs/
 
-mod config;
+pub mod config;
 
 use std::sync::Arc;
 
 pub use config::ClientConfig;
-use config::UniFFIConfig;
+use config::{UniFFIConfig, UniFFIIdentityProvider};
 
 #[cfg(not(mls_build_async))]
 use std::sync::Mutex;
@@ -31,12 +31,12 @@ use tokio::sync::Mutex;
 
 use mls_rs::error::{IntoAnyError, MlsError};
 use mls_rs::group;
-use mls_rs::identity::basic;
 use mls_rs::mls_rules;
 use mls_rs::{CipherSuiteProvider, CryptoProvider};
 use mls_rs_core::identity;
 use mls_rs_core::identity::{BasicCredential, IdentityProvider};
-use mls_rs_crypto_openssl::OpensslCryptoProvider;
+
+use config::UniFFICryptoProvider as CryptoProviderImpl;
 
 uniffi::setup_scaffolding!();
 
@@ -121,9 +121,9 @@ impl From<SignatureSecretKey> for mls_rs::crypto::SignatureSecretKey {
 /// A ([`SignaturePublicKey`], [`SignatureSecretKey`]) pair.
 #[derive(uniffi::Record, Clone, Debug)]
 pub struct SignatureKeypair {
-    cipher_suite: CipherSuite,
-    public_key: SignaturePublicKey,
-    secret_key: SignatureSecretKey,
+    pub cipher_suite: CipherSuite,
+    pub public_key: SignaturePublicKey,
+    pub secret_key: SignatureSecretKey,
 }
 
 /// A [`mls_rs::ExtensionList`] wrapper.
@@ -186,6 +186,28 @@ pub struct Message {
 impl From<mls_rs::MlsMessage> for Message {
     fn from(inner: mls_rs::MlsMessage) -> Self {
         Self { inner }
+    }
+}
+
+#[uniffi::export]
+impl Message {
+    /// Serialize to the RFC 9420 wire format.
+    ///
+    /// The resulting bytes are what your transport sends to other
+    /// clients and are byte-identical across all platforms — a Kotlin
+    /// `Message.toBytes()` produces the same wire format a WASM
+    /// `Uint8Array` or a Rust `MlsMessage::to_bytes()` does.
+    pub fn to_bytes(&self) -> Result<Vec<u8>, Error> {
+        self.inner.to_bytes().map_err(Into::into)
+    }
+
+    /// Parse an MLS message from wire-format bytes, e.g. received
+    /// from your delivery service.
+    #[uniffi::constructor]
+    pub fn from_bytes(bytes: &[u8]) -> Result<Message, Error> {
+        mls_rs::MlsMessage::from_bytes(bytes)
+            .map(Into::into)
+            .map_err(Into::into)
     }
 }
 
@@ -272,17 +294,30 @@ pub enum ReceivedMessage {
 /// Supported cipher suites.
 ///
 /// This is a subset of the cipher suites found in
-/// [`mls_rs::CipherSuite`].
+/// [`mls_rs::CipherSuite`]: all cipher suites implemented by the
+/// RustCrypto backend are exposed (MLS suites 1, 2, 3, 5 and 7).
 #[derive(Copy, Clone, Debug, uniffi::Enum)]
 pub enum CipherSuite {
-    // TODO(mgeisler): add more cipher suites.
+    /// `MLS_128_DHKEMX25519_AES128GCM_SHA256_Ed25519` (suite 1).
     Curve25519Aes128,
+    /// `MLS_128_DHKEMP256_AES128GCM_SHA256_P256` (suite 2).
+    P256Aes128,
+    /// `MLS_128_DHKEMX25519_CHACHA20POLY1305_SHA256_Ed25519` (suite 3).
+    Curve25519ChaCha,
+    /// `MLS_256_DHKEMP521_AES256GCM_SHA512_P521` (suite 5).
+    P521Aes256,
+    /// `MLS_256_DHKEMP384_AES256GCM_SHA384_P384` (suite 7).
+    P384Aes256,
 }
 
 impl From<CipherSuite> for mls_rs::CipherSuite {
     fn from(cipher_suite: CipherSuite) -> mls_rs::CipherSuite {
         match cipher_suite {
             CipherSuite::Curve25519Aes128 => mls_rs::CipherSuite::CURVE25519_AES128,
+            CipherSuite::P256Aes128 => mls_rs::CipherSuite::P256_AES128,
+            CipherSuite::Curve25519ChaCha => mls_rs::CipherSuite::CURVE25519_CHACHA,
+            CipherSuite::P521Aes256 => mls_rs::CipherSuite::P521_AES256,
+            CipherSuite::P384Aes256 => mls_rs::CipherSuite::P384_AES256,
         }
     }
 }
@@ -293,6 +328,10 @@ impl TryFrom<mls_rs::CipherSuite> for CipherSuite {
     fn try_from(cipher_suite: mls_rs::CipherSuite) -> Result<Self, Self::Error> {
         match cipher_suite {
             mls_rs::CipherSuite::CURVE25519_AES128 => Ok(CipherSuite::Curve25519Aes128),
+            mls_rs::CipherSuite::P256_AES128 => Ok(CipherSuite::P256Aes128),
+            mls_rs::CipherSuite::CURVE25519_CHACHA => Ok(CipherSuite::Curve25519ChaCha),
+            mls_rs::CipherSuite::P521_AES256 => Ok(CipherSuite::P521Aes256),
+            mls_rs::CipherSuite::P384_AES256 => Ok(CipherSuite::P384Aes256),
             _ => Err(MlsError::UnsupportedCipherSuite(cipher_suite))?,
         }
     }
@@ -310,7 +349,7 @@ impl TryFrom<mls_rs::CipherSuite> for CipherSuite {
 pub async fn generate_signature_keypair(
     cipher_suite: CipherSuite,
 ) -> Result<SignatureKeypair, Error> {
-    let crypto_provider = mls_rs_crypto_openssl::OpensslCryptoProvider::default();
+    let crypto_provider = CryptoProviderImpl::default();
     let cipher_suite_provider = crypto_provider
         .cipher_suite_provider(cipher_suite.into())
         .ok_or(MlsError::UnsupportedCipherSuite(cipher_suite.into()))?;
@@ -335,6 +374,34 @@ pub struct Client {
     inner: mls_rs::client::Client<UniFFIConfig>,
 }
 
+impl Client {
+    fn with_credential(
+        credential: mls_rs_core::identity::Credential,
+        signature_keypair: SignatureKeypair,
+        client_config: ClientConfig,
+    ) -> Result<Self, Error> {
+        let cipher_suite = signature_keypair.cipher_suite;
+        let public_key = signature_keypair.public_key;
+        let secret_key = signature_keypair.secret_key;
+        let crypto_provider = CryptoProviderImpl::new();
+        let identity_provider = UniFFIIdentityProvider::new(&client_config)?;
+        let signing_identity = identity::SigningIdentity::new(credential, public_key.into());
+        let commit_options = mls_rules::CommitOptions::default()
+            .with_ratchet_tree_extension(client_config.use_ratchet_tree_extension)
+            .with_single_welcome_message(true);
+        let mls_rules = mls_rules::DefaultMlsRules::new().with_commit_options(commit_options);
+        let client = mls_rs::Client::builder()
+            .crypto_provider(crypto_provider)
+            .identity_provider(identity_provider)
+            .signing_identity(signing_identity, secret_key.into(), cipher_suite.into())
+            .group_state_storage(client_config.group_state_storage.into())
+            .mls_rules(mls_rules)
+            .build();
+
+        Ok(Client { inner: client })
+    }
+}
+
 #[cfg_attr(not(mls_build_async), maybe_async::must_be_sync)]
 #[cfg_attr(mls_build_async, maybe_async::must_be_async)]
 #[uniffi::export]
@@ -350,27 +417,41 @@ impl Client {
         id: Vec<u8>,
         signature_keypair: SignatureKeypair,
         client_config: ClientConfig,
-    ) -> Self {
-        let cipher_suite = signature_keypair.cipher_suite;
-        let public_key = signature_keypair.public_key;
-        let secret_key = signature_keypair.secret_key;
-        let crypto_provider = OpensslCryptoProvider::new();
+    ) -> Result<Self, Error> {
         let basic_credential = BasicCredential::new(id);
-        let signing_identity =
-            identity::SigningIdentity::new(basic_credential.into_credential(), public_key.into());
-        let commit_options = mls_rules::CommitOptions::default()
-            .with_ratchet_tree_extension(client_config.use_ratchet_tree_extension)
-            .with_single_welcome_message(true);
-        let mls_rules = mls_rules::DefaultMlsRules::new().with_commit_options(commit_options);
-        let client = mls_rs::Client::builder()
-            .crypto_provider(crypto_provider)
-            .identity_provider(basic::BasicIdentityProvider::new())
-            .signing_identity(signing_identity, secret_key.into(), cipher_suite.into())
-            .group_state_storage(client_config.group_state_storage.into())
-            .mls_rules(mls_rules)
-            .build();
+        Self::with_credential(
+            basic_credential.into_credential(),
+            signature_keypair,
+            client_config,
+        )
+    }
 
-        Client { inner: client }
+    /// Create a new client identified by an X.509 certificate chain.
+    ///
+    /// `certificate_chain` is a list of DER-encoded X.509 certificates,
+    /// starting with the leaf certificate. The chain is validated against
+    /// the root CA certificates configured in
+    /// [`ClientConfig::root_ca_certificates`], and the leaf certificate's
+    /// public key must match `signature_keypair.public_key`.
+    #[uniffi::constructor]
+    pub fn new_with_x509(
+        certificate_chain: Vec<Vec<u8>>,
+        signature_keypair: SignatureKeypair,
+        client_config: ClientConfig,
+    ) -> Result<Self, Error> {
+        let chain = mls_rs_core::identity::CertificateChain::from(certificate_chain);
+        let identity_provider = UniFFIIdentityProvider::new(&client_config)?;
+
+        let leaf_key = identity_provider.validate_x509_chain(&chain)?;
+
+        if leaf_key != signature_keypair.public_key.clone().into() {
+            return Err(Error::AnyError {
+                inner: mls_rs_identity_x509::X509IdentityError::SignatureKeyMismatch
+                    .into_any_error(),
+            });
+        }
+
+        Self::with_credential(chain.into_credential(), signature_keypair, client_config)
     }
 
     /// Generate a new key package for this client.
@@ -542,6 +623,45 @@ impl From<identity::SigningIdentity> for SigningIdentity {
     }
 }
 
+#[cfg_attr(not(mls_build_async), maybe_async::must_be_sync)]
+#[cfg_attr(mls_build_async, maybe_async::must_be_async)]
+#[uniffi::export]
+impl SigningIdentity {
+    /// Construct a basic-credential signing identity from an
+    /// application-level identifier and the member's signature public
+    /// key.
+    ///
+    /// Useful for operations like [`Group::remove_members`] where you
+    /// need another member's identity without having received a
+    /// message from them first.
+    #[uniffi::constructor]
+    pub fn new_basic(id: Vec<u8>, public_key: SignaturePublicKey) -> Self {
+        let credential = BasicCredential::new(id).into_credential();
+        Self {
+            inner: identity::SigningIdentity::new(credential, public_key.into()),
+        }
+    }
+
+    /// Construct an X.509 signing identity from a DER-encoded
+    /// certificate chain (leaf first) and the member's signature
+    /// public key.
+    #[uniffi::constructor]
+    pub fn new_x509(certificate_chain: Vec<Vec<u8>>, public_key: SignaturePublicKey) -> Self {
+        let chain = mls_rs_core::identity::CertificateChain::from(certificate_chain);
+        Self {
+            inner: identity::SigningIdentity::new(chain.into_credential(), public_key.into()),
+        }
+    }
+
+    /// The application-level identifier this identity resolves to.
+    ///
+    /// Basic credentials resolve to their raw `id`; X.509 credentials
+    /// resolve to the certificate subject common name.
+    pub async fn identifier(&self) -> Result<Vec<u8>, Error> {
+        signing_identity_to_identifier(&self.inner).await
+    }
+}
+
 /// An MLS end-to-end encrypted group.
 ///
 /// The group is used to send and process incoming messages and to
@@ -578,23 +698,72 @@ fn index_to_identity(
     Ok(member.signing_identity)
 }
 
-/// Extract the basic credential identifier from a  from a key package.
+/// Extract the credential identifier from a signing identity.
+///
+/// Basic credentials resolve through `BasicIdentityProvider`; X.509
+/// credentials resolve through the same subject/common-name extractor
+/// used by [`UniFFIIdentityProvider`].
 #[cfg_attr(not(mls_build_async), maybe_async::must_be_sync)]
 #[cfg_attr(mls_build_async, maybe_async::must_be_async)]
 async fn signing_identity_to_identifier(
     signing_identity: &identity::SigningIdentity,
 ) -> Result<Vec<u8>, Error> {
-    let identifier = basic::BasicIdentityProvider::new()
-        .identity(signing_identity, &mls_rs::ExtensionList::new())
-        .await
-        .map_err(|err| err.into_any_error())?;
-    Ok(identifier)
+    use mls_rs::identity::basic::BasicIdentityProvider;
+    use mls_rs_core::identity::CredentialType;
+
+    match signing_identity.credential.credential_type() {
+        CredentialType::X509 => {
+            use config::UniFFIX509Reader;
+            use mls_rs_identity_x509::SubjectIdentityExtractor;
+
+            let chain = signing_identity.credential.as_x509().ok_or_else(|| {
+                config::UniFFIIdentityProviderError::UnsupportedCredentialType(CredentialType::X509)
+                    .into_any_error()
+            })?;
+
+            SubjectIdentityExtractor::new(0, UniFFIX509Reader::new())
+                .identity(chain)
+                .map_err(|err| err.into_any_error())
+                .map_err(Into::into)
+        }
+        _ => BasicIdentityProvider::new()
+            .identity(signing_identity, &mls_rs::ExtensionList::new())
+            .await
+            .map_err(|err| err.into_any_error())
+            .map_err(Into::into),
+    }
 }
 
 #[cfg_attr(not(mls_build_async), maybe_async::must_be_sync)]
 #[cfg_attr(mls_build_async, maybe_async::must_be_async)]
 #[uniffi::export]
 impl Group {
+    /// List the current members' signing identities.
+    ///
+    /// The returned identities are in no particular order; use
+    /// [`SigningIdentity::identifier`] to map them to application-level
+    /// user ids.
+    pub async fn members(&self) -> Result<Vec<Arc<SigningIdentity>>, Error> {
+        let group = self.inner().await;
+        Ok(group
+            .roster()
+            .members()
+            .into_iter()
+            .map(|member| Arc::new(member.signing_identity.into()))
+            .collect())
+    }
+
+    /// Find a member's signing identity by its application-level
+    /// identifier (the basic credential `id` or X.509 subject CN).
+    pub async fn member_with_identity(
+        &self,
+        identifier: Vec<u8>,
+    ) -> Result<Arc<SigningIdentity>, Error> {
+        let group = self.inner().await;
+        let member = group.member_with_identity(&identifier).await?;
+        Ok(Arc::new(member.signing_identity.into()))
+    }
+
     /// Write the current state of the group to storage defined by
     /// [`ClientConfig::group_state_storage`]
     pub async fn write_to_storage(&self) -> Result<(), Error> {
@@ -873,14 +1042,14 @@ mod tests {
             ..Default::default()
         };
         let alice_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
-        let alice = Client::new(b"alice".to_vec(), alice_keypair, alice_config);
+        let alice = Client::new(b"alice".to_vec(), alice_keypair, alice_config)?;
 
         let bob_config = ClientConfig {
             group_state_storage: Arc::new(CustomGroupStateStorage::new()),
             ..Default::default()
         };
         let bob_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
-        let bob = Client::new(b"bob".to_vec(), bob_keypair, bob_config);
+        let bob = Client::new(b"bob".to_vec(), bob_keypair, bob_config)?;
 
         let alice_group = alice.create_group(None)?;
         let bob_key_package = bob.generate_key_package_message()?;
@@ -912,7 +1081,7 @@ mod tests {
         };
 
         let alice_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
-        let alice = Client::new(b"alice".to_vec(), alice_keypair, alice_config);
+        let alice = Client::new(b"alice".to_vec(), alice_keypair, alice_config)?;
         let group = alice.create_group(None)?;
 
         assert_eq!(group.commit()?.ratchet_tree, None);
@@ -928,7 +1097,7 @@ mod tests {
         };
 
         let alice_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
-        let alice = Client::new(b"alice".to_vec(), alice_keypair, alice_config);
+        let alice = Client::new(b"alice".to_vec(), alice_keypair, alice_config)?;
         let group = alice.create_group(None)?;
 
         let ratchet_tree: group::ExportedTree =

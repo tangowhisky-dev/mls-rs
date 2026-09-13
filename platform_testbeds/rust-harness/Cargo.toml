@@ -1,0 +1,25 @@
+[package]
+name = "mls-rs-e2e-harness"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "End-to-end test harness for mls-rs with the RustCrypto backend (suites 1, 2, 3, 5, 7 + X.509)"
+
+# Detach from the parent workspace: this crate is a standalone testbed.
+[workspace]
+
+[dependencies]
+mls-rs-uniffi = { path = "../../mls-rs-uniffi" }
+mls-rs = { path = "../../mls-rs" }
+mls-rs-core = { path = "../../mls-rs-core" }
+mls-rs-crypto-rustcrypto = { path = "../../mls-rs-crypto-rustcrypto", features = ["x509"] }
+mls-rs-identity-x509 = { path = "../../mls-rs-identity-x509" }
+maybe-async = "0.2"
+
+# Used to load the PEM private keys belonging to the X.509 test
+# certificates under mls-rs-crypto-rustcrypto/test_data.
+ed25519-dalek = { version = "2", features = ["pkcs8", "pem"] }
+p256 = { version = "0.13", features = ["pkcs8", "pem"] }
+p384 = { version = "0.13", features = ["pkcs8", "pem"] }
+p521 = { version = "0.13", features = ["pkcs8", "pem"] }
+zeroize = "1"

@@ -23,6 +23,7 @@ pub const X25519_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap("1.3.101.1
 pub const ED25519_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap("1.3.101.112");
 pub const P256_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap("1.2.840.10045.3.1.7");
 pub const P384_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap("1.3.132.0.34");
+pub const P521_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap("1.3.132.0.35");
 
 #[derive(Debug)]
 #[cfg_attr(feature = "std", derive(thiserror::Error))]
@@ -71,6 +72,8 @@ pub fn curve_from_algorithm(algorithm: &AlgorithmIdentifier<Any>) -> Result<Curv
         Ok(Curve::P256)
     } else if borrowed.parameters_oid() == Ok(P384_OID) {
         Ok(Curve::P384)
+    } else if borrowed.parameters_oid() == Ok(P521_OID) {
+        Ok(Curve::P521)
     } else {
         Err(EcX509Error::UnsupportedPublicKeyAlgorithm(format!(
             "{:?}",
@@ -85,7 +88,9 @@ pub fn signer_from_algorithm(
     let curve = curve_from_algorithm(algorithm)?;
 
     match curve {
-        Curve::Ed25519 | Curve::P256 | Curve::P384 => Ok(EcSigner::new_from_curve(curve)),
+        Curve::Ed25519 | Curve::P256 | Curve::P384 | Curve::P521 => {
+            Ok(EcSigner::new_from_curve(curve))
+        }
         _ => Err(EcX509Error::UnsupportedPublicKeyAlgorithm(format!(
             "{:?}",
             algorithm.oid
@@ -102,6 +107,10 @@ pub fn pub_key_to_spki(key: &EcPublicKey) -> Result<Vec<u8>, EcX509Error> {
             .map_err(|_| EcX509Error::NistSpkiError)?
             .to_vec()),
         EcPublicKey::P384(key) => Ok(key
+            .to_public_key_der()
+            .map_err(|_| EcX509Error::NistSpkiError)?
+            .to_vec()),
+        EcPublicKey::P521(key) => Ok(key
             .to_public_key_der()
             .map_err(|_| EcX509Error::NistSpkiError)?
             .to_vec()),
@@ -126,6 +135,9 @@ pub fn pub_key_from_spki(
         Curve::P384 => p384::PublicKey::from_sec1_bytes(spki.subject_public_key.raw_bytes())
             .map_err(|e| EcX509Error::from(EcError::P384Error(e)))
             .map(EcPublicKey::P384),
+        Curve::P521 => p521::PublicKey::from_sec1_bytes(spki.subject_public_key.raw_bytes())
+            .map_err(|e| EcX509Error::from(EcError::P521Error(e)))
+            .map(EcPublicKey::P521),
         _ => Err(EcError::UnsupportedCurve.into()),
     }
 }

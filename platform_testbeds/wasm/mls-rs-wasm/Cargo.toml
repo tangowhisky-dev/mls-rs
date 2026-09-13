@@ -1,0 +1,65 @@
+[package]
+name = "mls-rs-wasm"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "wasm-bindgen bindings for mls-rs with the RustCrypto backend"
+
+# Detach from the parent workspace: this crate is a standalone testbed.
+[workspace]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# `rayon` is intentionally not enabled: it does not work on
+# wasm32-unknown-unknown.
+mls-rs = { path = "../../../mls-rs", default-features = false, features = [
+    "std",
+    "rfc_compliant",
+    "tree_index",
+    "fast_serialize",
+] }
+mls-rs-core = { path = "../../../mls-rs-core", default-features = false, features = ["std"] }
+mls-rs-identity-x509 = { path = "../../../mls-rs-identity-x509", default-features = false, features = [
+    "std",
+] }
+# `browser` enables getrandom's wasm-bindgen backend so all randomness
+# comes from the browser/Node CSPRNG.
+mls-rs-crypto-rustcrypto = { path = "../../../mls-rs-crypto-rustcrypto", default-features = false, features = [
+    "std",
+    "x509",
+    "browser",
+] }
+mls-rs-codec = { path = "../../../mls-rs-codec" }
+wasm-bindgen = "0.2"
+zeroize = "1"
+thiserror = "2.0.20"
+js-sys = "0.3.105"
+maybe-async = "0.2.10"
+# Referenced by `wasm_bindgen`-generated glue whenever `pub async fn`s
+# exist (`mls_build_async` builds) — needed on all targets, not just
+# wasm.
+wasm-bindgen-futures = "0.4"
+# `must_be_async` rewrites trait impls through `async_trait` in
+# `mls_build_async` builds; not used by the sync build.
+async-trait = "0.1.74"
+# Async mutex for `mls_build_async` builds (works on single-threaded
+# wasm; not used by the sync build).
+tokio = { version = "1", features = ["sync"] }
+
+[target.'cfg(target_family = "wasm")'.dependencies]
+# IndexedDB-backed persistent storage (Wire-keystore-style: encrypted
+# values, hydrate + write-behind in sync builds, write-through in
+# `mls_build_async` builds).
+idb = "0.6"
+aes-gcm = "0.10"
+futures-channel = "0.3"
+# Lets `!Send` IndexedDB futures be awaited inside the storage traits'
+# `Send`-bound futures in `mls_build_async` builds (single-threaded
+# wasm makes this sound).
+send_wrapper = { version = "0.6", features = ["futures"] }
+getrandom = { version = "0.2", features = ["js"] }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(mls_build_async)'] }

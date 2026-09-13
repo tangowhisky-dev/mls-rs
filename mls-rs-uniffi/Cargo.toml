@@ -11,15 +11,38 @@ license = "Apache-2.0 OR MIT"
 rust-version = "1.82.0"
 
 [lib]
-crate-type = ["lib", "cdylib"]
+crate-type = ["lib", "cdylib", "staticlib"]
 name = "mls_rs_uniffi"
+
+# Crypto provider selection. The `rustcrypto` backend (pure-Rust
+# RustCrypto primitives: suites 1, 2, 3, 5, 7 with X.509 support) is
+# the default since it works on every platform including iOS, Android
+# and WebAssembly. The `openssl` backend is kept as an opt-in
+# alternative for platforms where OpenSSL is available. If both
+# features are enabled, `rustcrypto` takes precedence.
+[features]
+default = ["rustcrypto"]
+rustcrypto = [
+    "dep:mls-rs-crypto-rustcrypto",
+    "dep:mls-rs-identity-x509",
+    "mls-rs/x509",
+    "mls-rs-crypto-rustcrypto/x509",
+]
+openssl = [
+    "dep:mls-rs-crypto-openssl",
+    "dep:mls-rs-identity-x509",
+    "mls-rs/x509",
+    "mls-rs-crypto-openssl/x509",
+]
 
 [dependencies]
 async-trait = "0.1.77"
 maybe-async = "0.2.10"
 mls-rs = { version = "0.56.0", path = "../mls-rs" }
 mls-rs-core = { version = "0.27.0", path = "../mls-rs-core" }
-mls-rs-crypto-openssl = { version = "0.21.0", path = "../mls-rs-crypto-openssl" }
+mls-rs-crypto-openssl = { version = "0.21.0", path = "../mls-rs-crypto-openssl", optional = true }
+mls-rs-crypto-rustcrypto = { version = "0.22.1", path = "../mls-rs-crypto-rustcrypto", optional = true }
+mls-rs-identity-x509 = { version = "0.21.0", path = "../mls-rs-identity-x509", optional = true }
 thiserror = "2"
 uniffi = { version = "0.31" }
 zeroize = "1"

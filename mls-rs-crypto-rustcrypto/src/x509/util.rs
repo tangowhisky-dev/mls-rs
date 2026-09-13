@@ -11,7 +11,10 @@ use std::{net::IpAddr, str::FromStr};
 use spki::{
     der::{
         asn1::{Ia5String, OctetString, PrintableString, PrintableStringRef},
-        oid::db::{rfc3280, rfc4519, rfc5912::ECDSA_WITH_SHA_256},
+        oid::db::{
+            rfc3280, rfc4519,
+            rfc5912::{ECDSA_WITH_SHA_256, ECDSA_WITH_SHA_384, ECDSA_WITH_SHA_512},
+        },
         Tag, Tagged,
     },
     ObjectIdentifier,
@@ -49,6 +52,8 @@ pub(super) fn object_id_for_ciphersuite(
 ) -> Result<ObjectIdentifier, X509Error> {
     match cipher_suite {
         CipherSuite::P256_AES128 => Ok(ECDSA_WITH_SHA_256),
+        CipherSuite::P384_AES256 => Ok(ECDSA_WITH_SHA_384),
+        CipherSuite::P521_AES256 => Ok(ECDSA_WITH_SHA_512),
         CipherSuite::CURVE25519_AES128 | CipherSuite::CURVE25519_CHACHA => Ok(ED25519_OID),
         _ => Err(X509Error::InvalidSigningKey(cipher_suite)),
     }

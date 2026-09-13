@@ -24,6 +24,8 @@ std = [
     "hmac/std",
     "hkdf/std",
     "p256/std",
+    "p384/std",
+    "p521/std",
     "sec1/std",
     "dep:thiserror"
 ]
@@ -55,6 +57,7 @@ hkdf = { version = "0.12", default-features = false }
 # KEM
 p256 = { version = "0.13", default-features = false, features = ["alloc", "ecdh", "ecdsa", "pem"] }
 p384 = { version = "0.13", default-features = false, features = ["alloc", "ecdh", "ecdsa", "pem"] }
+p521 = { version = "0.13", default-features = false, features = ["alloc", "ecdh", "ecdsa", "pem", "getrandom"] }
 x25519-dalek = { version = "2", default-features = false, features = ["alloc", "static_secrets"] }
 ed25519-dalek = { version = "2", default-features = false, features = ["alloc", "rand_core"] }
 sec1 = { version = "0.8", default-features = false, features = ["alloc"] }

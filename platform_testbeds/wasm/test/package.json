@@ -1,0 +1,8 @@
+{
+  "name": "mls-rs-wasm-tests",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "fake-indexeddb": "^6.0.0"
+  }
+}

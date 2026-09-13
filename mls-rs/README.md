@@ -57,7 +57,7 @@ For cipher suite descriptions see the RFC documentation [here](https://www.rfc-e
 | ----------- | ------------- | --------------- |
 | OpenSSL     | 1-7           | Stable          |
 | AWS-LC      | 1,2,3,5,7     | Stable          |
-| Rust Crypto | 1,2,3         | ⚠️ Experimental |
+| Rust Crypto | 1,2,3,5,7     | Stable          |
 | Web Crypto  | ⚠️ Experimental 2,5,7 | Unsupported |
 | CryptoKit   | 1,2,3,5,7     | Unsupported     |
 
@@ -66,6 +66,15 @@ For cipher suite descriptions see the RFC documentation [here](https://www.rfc-e
 This library has been validated for conformance to the RFC 9420 specification but has not yet received a full security audit by a 3rd party.
 
 <!-- cargo-sync-readme end -->
+
+## Documentation
+
+- **[The mls-rs Book](docs/)** — multi-platform guide: prerequisites,
+  per-platform installation, API-by-functionality pages with Rust /
+  Kotlin / Swift / WebAssembly tabs. Build with `mdbook build docs/`
+  or browse `docs/src/` directly.
+- **[platform_testbeds/](platform_testbeds/)** — end-to-end harnesses
+  and packaging scripts (`INTEGRATION.md` for the short path).
 
 ## License
 

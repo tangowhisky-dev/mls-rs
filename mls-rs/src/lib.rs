@@ -50,7 +50,7 @@
 //! |------|---------------|--------------|
 //! | OpenSSL | 1-7 | Stable |
 //! | AWS-LC | 1,2,3,5,7 | Stable |
-//! | Rust Crypto | 1,2,3 | ⚠️ Experimental |
+//! | Rust Crypto | 1,2,3,5,7 | Stable |
 //!
 //! ## Security Notice
 //!

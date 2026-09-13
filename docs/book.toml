@@ -1,0 +1,13 @@
+[book]
+title = "The mls-rs Book"
+description = "Multi-platform guide to mls-rs with the RustCrypto backend: Rust, Kotlin/Java, Swift and WebAssembly"
+src = "src"
+language = "en"
+authors = []
+
+[preprocessor.tabs]
+
+[output.html]
+git-repository-url = "https://github.com/awslabs/mls-rs"
+default-theme = "navy"
+preferred-dark-theme = "navy"

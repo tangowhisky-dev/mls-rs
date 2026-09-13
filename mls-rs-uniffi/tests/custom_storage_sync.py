@@ -63,7 +63,9 @@ class PythonGroupStateStorage(GroupStateStorage):
 
 group_state_storage = PythonGroupStateStorage()
 client_config = ClientConfig(group_state_storage=group_state_storage,
-                             use_ratchet_tree_extension=True)
+                             use_ratchet_tree_extension=True,
+                             root_ca_certificates=[],
+                             allow_self_signed_certificates=False)
 
 key = generate_signature_keypair(CipherSuite.CURVE25519_AES128)
 alice = Client(b'alice', key, client_config)
