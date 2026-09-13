@@ -4,15 +4,17 @@ use std::sync::Arc;
 use mls_rs::{
     client_builder::{self, WithGroupStateStorage},
     identity::basic,
-    storage_provider::in_memory::InMemoryGroupStateStorage,
+    storage_provider::in_memory::{InMemoryGroupStateStorage, InMemoryKeyPackageStorage},
 };
 use mls_rs_core::error::IntoAnyError;
 use zeroize::Zeroizing;
 
 use self::group_state::{GroupStateStorage, GroupStateStorageAdapter};
+use self::key_package::{ClientKeyPackageStorage, KeyPackageStorage, KeyPackageStorageAdapter};
 use crate::Error;
 
 pub mod group_state;
+pub mod key_package;
 
 #[cfg(feature = "rustcrypto")]
 pub(crate) use mls_rs_crypto_rustcrypto::RustCryptoProvider as UniFFICryptoProvider;
@@ -234,13 +236,20 @@ pub type UniFFIConfig = client_builder::WithIdentityProvider<
     UniFFIIdentityProvider,
     client_builder::WithCryptoProvider<
         UniFFICryptoProvider,
-        WithGroupStateStorage<ClientGroupStorage, client_builder::BaseConfig>,
+        client_builder::WithKeyPackageRepo<
+            ClientKeyPackageStorage,
+            WithGroupStateStorage<ClientGroupStorage, client_builder::BaseConfig>,
+        >,
     >,
 >;
 
 #[derive(Debug, Clone, uniffi::Record)]
 pub struct ClientConfig {
     pub group_state_storage: Arc<dyn GroupStateStorage>,
+    /// Persistent storage for key package init secrets. Without it,
+    /// welcomes addressed to key packages generated before an app
+    /// restart can no longer be joined.
+    pub key_package_storage: Arc<dyn KeyPackageStorage>,
     /// Use the ratchet tree extension. If this is false, then you
     /// must supply `ratchet_tree` out of band to clients.
     pub use_ratchet_tree_extension: bool,
@@ -261,6 +270,9 @@ impl Default for ClientConfig {
         Self {
             group_state_storage: Arc::new(GroupStateStorageAdapter::new(
                 InMemoryGroupStateStorage::new(),
+            )),
+            key_package_storage: Arc::new(KeyPackageStorageAdapter::new(
+                InMemoryKeyPackageStorage::new(),
             )),
             use_ratchet_tree_extension: true,
             root_ca_certificates: Vec::new(),

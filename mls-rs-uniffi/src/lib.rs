@@ -395,6 +395,7 @@ impl Client {
             .identity_provider(identity_provider)
             .signing_identity(signing_identity, secret_key.into(), cipher_suite.into())
             .group_state_storage(client_config.group_state_storage.into())
+            .key_package_repo(client_config.key_package_storage.into())
             .mls_rules(mls_rules)
             .build();
 
