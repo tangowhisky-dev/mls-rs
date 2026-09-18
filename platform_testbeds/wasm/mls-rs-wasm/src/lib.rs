@@ -1080,4 +1080,26 @@ impl WasmGroup {
             .to_bytes()
             .map_err(js_error)
     }
+
+    /// Export a secret bound to the current epoch's key schedule
+    /// (RFC 9420 §8.5, MLS-Exporter). Identical `(label, context, len)`
+    /// on all members at the same epoch yields the same secret —
+    /// rotates automatically when the epoch advances. Use it to
+    /// derive application-level keys (e.g. per-epoch call media keys).
+    #[wasm_bindgen(js_name = "exportSecret")]
+    pub async fn export_secret(
+        &self,
+        label: Vec<u8>,
+        context: Vec<u8>,
+        len: u32,
+    ) -> Result<Vec<u8>, JsError> {
+        Ok(self
+            .group()
+            .await
+            .export_secret(&label, &context, len as usize)
+            .await
+            .map_err(mls_error)?
+            .as_bytes()
+            .to_vec())
+    }
 }

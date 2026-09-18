@@ -782,6 +782,26 @@ impl Group {
         group.export_tree().try_into()
     }
 
+    /// Export a secret bound to the current epoch's key schedule
+    /// (RFC 9420 §8.5, MLS-Exporter). Identical `(label, context, len)`
+    /// inputs on all members at the same epoch produce the same
+    /// secret; the secret rotates whenever the epoch advances.
+    ///
+    /// Intended for deriving application-level keys — e.g. per-epoch
+    /// call media keys — that must never leave MLS state.
+    pub async fn export_secret(
+        &self,
+        label: Vec<u8>,
+        context: Vec<u8>,
+        len: u32,
+    ) -> Result<Vec<u8>, Error> {
+        let group = self.inner().await;
+        let secret = group
+            .export_secret(&label, &context, len as usize)
+            .await?;
+        Ok(secret.as_bytes().to_vec())
+    }
+
     /// Perform a commit of received proposals (or an empty commit).
     ///
     /// TODO: ensure `path_required` is always set in
