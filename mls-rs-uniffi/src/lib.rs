@@ -160,6 +160,22 @@ pub struct JoinInfo {
     pub group_info_extensions: Arc<ExtensionList>,
 }
 
+/// Result of a successful external commit: the freshly-joined group
+/// plus the commit message to broadcast to the other members (there
+/// is no Welcome — the joiner already holds everything it needs).
+#[derive(uniffi::Record, Clone)]
+pub struct ExternalJoinInfo {
+    /// The group as joined by the external commit.
+    pub group: Arc<Group>,
+    /// The external commit message — deliver it to the group.
+    pub commit_message: Arc<Message>,
+    /// Leaf index this commit removed: set when the group's roster
+    /// still carried a leaf with this client's credential and the
+    /// commit replaced it (the stranded-device self-rejoin); `None`
+    /// for a plain external join of a new member.
+    pub removed_leaf_index: Option<u32>,
+}
+
 #[derive(Copy, Clone, Debug, uniffi::Enum)]
 pub enum ProtocolVersion {
     /// MLS version 1.0.
@@ -372,6 +388,10 @@ pub async fn generate_signature_keypair(
 #[derive(Clone, Debug, uniffi::Object)]
 pub struct Client {
     inner: mls_rs::client::Client<UniFFIConfig>,
+    /// Retained so the client can spin up an `ExternalClient` with the
+    /// same identity policy when inspecting a `GroupInfo` ahead of an
+    /// external commit.
+    config: ClientConfig,
 }
 
 impl Client {
@@ -394,12 +414,15 @@ impl Client {
             .crypto_provider(crypto_provider)
             .identity_provider(identity_provider)
             .signing_identity(signing_identity, secret_key.into(), cipher_suite.into())
-            .group_state_storage(client_config.group_state_storage.into())
-            .key_package_repo(client_config.key_package_storage.into())
+            .group_state_storage(client_config.group_state_storage.clone().into())
+            .key_package_repo(client_config.key_package_storage.clone().into())
             .mls_rules(mls_rules)
             .build();
 
-        Ok(Client { inner: client })
+        Ok(Client {
+            inner: client,
+            config: client_config,
+        })
     }
 }
 
@@ -526,6 +549,64 @@ impl Client {
         Ok(JoinInfo {
             group,
             group_info_extensions,
+        })
+    }
+
+    /// Join a group by external commit — no Welcome required.
+    ///
+    /// `group_info` must have been produced by a group member via
+    /// [`Group::group_info_message_allowing_ext_commit`]; `tree_data`
+    /// is required only when that GroupInfo was exported without the
+    /// ratchet-tree extension.
+    ///
+    /// When the roster still carries a leaf with this client's
+    /// credential — a device that lost its local group state while
+    /// remaining a member everywhere else — the commit removes that
+    /// stale leaf, so a single commit replaces it. Otherwise this is
+    /// a plain external join.
+    ///
+    /// See [`mls_rs::Client::commit_external`] for details.
+    pub async fn external_commit(
+        &self,
+        group_info: &Message,
+        tree_data: Option<RatchetTree>,
+    ) -> Result<ExternalJoinInfo, Error> {
+        let tree: Option<group::ExportedTree<'static>> =
+            tree_data.map(TryInto::try_into).transpose()?;
+
+        // Locate our stale leaf, if any: observe the group and match
+        // our credential — a same-credential leaf is this client's
+        // prior self awaiting replacement.
+        let observer = mls_rs::external_client::ExternalClient::builder()
+            .crypto_provider(CryptoProviderImpl::default())
+            .identity_provider(config::UniFFIIdentityProvider::new(&self.config)?)
+            .build();
+        let observed = observer
+            .observe_group(group_info.inner.clone(), tree.clone(), None)
+            .await?;
+        let our_identity = self.inner.signing_identity()?.0;
+        let to_remove = observed
+            .roster()
+            .members()
+            .into_iter()
+            .find(|m| m.signing_identity.credential == our_identity.credential)
+            .map(|m| m.index());
+
+        let mut builder = self.inner.external_commit_builder()?;
+        if let Some(index) = to_remove {
+            builder = builder.with_removal(index);
+        }
+        if let Some(tree) = tree {
+            builder = builder.with_tree_data(tree);
+        }
+        let (group, commit_message) = builder.build(group_info.inner.clone()).await?;
+
+        Ok(ExternalJoinInfo {
+            group: Arc::new(Group {
+                inner: Arc::new(Mutex::new(group)),
+            }),
+            commit_message: Arc::new(commit_message.into()),
+            removed_leaf_index: to_remove,
         })
     }
 
@@ -780,6 +861,33 @@ impl Group {
     pub async fn export_tree(&self) -> Result<RatchetTree, Error> {
         let group = self.inner().await;
         group.export_tree().try_into()
+    }
+
+    /// A `GroupInfo` signed with this epoch's external key pair —
+    /// the blob a joiner needs for [`Client::external_commit`].
+    ///
+    /// Publish this on the delivery service so a stranded device
+    /// (one that lost local group state while staying rostered) can
+    /// rejoin without waiting for a member to re-welcome it, and so
+    /// external joiners can enter without an Add. With
+    /// `with_tree_in_extension` the ratchet tree rides inside the
+    /// message — the single blob serves the whole join.
+    ///
+    /// The message is valid for ONE external commit at this epoch;
+    /// re-export after each epoch change.
+    ///
+    /// See [`mls_rs::Group::group_info_message_allowing_ext_commit`]
+    /// for details.
+    pub async fn group_info_message_allowing_ext_commit(
+        &self,
+        with_tree_in_extension: bool,
+    ) -> Result<Message, Error> {
+        let group = self.inner().await;
+        group
+            .group_info_message_allowing_ext_commit(with_tree_in_extension)
+            .await
+            .map(Into::into)
+            .map_err(Into::into)
     }
 
     /// Export a secret bound to the current epoch's key schedule
@@ -1089,6 +1197,74 @@ mod tests {
             panic!("Wrong message type: {received_message:?}");
         };
         assert_eq!(data, b"hello, bob");
+
+        Ok(())
+    }
+
+    /// A device that lost its local group state — but is still in the
+    /// roster — rejoins by external commit, replacing its stale leaf.
+    /// Every remaining member must process that commit as ordinary
+    /// control traffic; the roster must keep exactly one leaf per
+    /// member.
+    #[test]
+    #[cfg(not(mls_build_async))]
+    fn test_external_commit_replaces_stale_leaf() -> Result<(), Error> {
+        let alice_config = ClientConfig::default();
+        let alice_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
+        let alice = Client::new(b"alice".to_vec(), alice_keypair, alice_config)?;
+
+        let bob_config = ClientConfig::default();
+        let bob_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
+        let bob = Client::new(b"bob".to_vec(), bob_keypair, bob_config)?;
+
+        let carol_config = ClientConfig::default();
+        let carol_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
+        let carol = Client::new(b"carol".to_vec(), carol_keypair, carol_config)?;
+
+        let alice_group = alice.create_group(None)?;
+        let bob_key_package = bob.generate_key_package_message()?;
+        let carol_key_package = carol.generate_key_package_message()?;
+        let commit =
+            alice_group.add_members(vec![Arc::new(bob_key_package), Arc::new(carol_key_package)])?;
+        alice_group.process_incoming_message(commit.commit_message)?;
+        let welcome = commit.welcome_message.unwrap();
+        let bob_group = bob.join_group(None, &welcome)?.group;
+        let carol_group = carol.join_group(None, &welcome)?.group;
+
+        // bob's device lost its group state: a fresh client for the
+        // same credential identity (fresh signature keypair, as a new
+        // key package would carry).
+        let bob2_config = ClientConfig::default();
+        let bob2_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
+        let bob2 = Client::new(b"bob".to_vec(), bob2_keypair, bob2_config)?;
+
+        let group_info = alice_group.group_info_message_allowing_ext_commit(true)?;
+        let join = bob2.external_commit(&group_info, None)?;
+        assert!(join.removed_leaf_index.is_some());
+
+        // Everyone still in the group applies the external commit.
+        alice_group.process_incoming_message(join.commit_message.clone())?;
+        carol_group.process_incoming_message(join.commit_message.clone())?;
+        bob_group.process_incoming_message(join.commit_message.clone())?;
+
+        let message = join.group.encrypt_application_message(b"hello again")?;
+        let received = alice_group.process_incoming_message(message.into())?;
+        let ReceivedMessage::ApplicationMessage { sender: _, data } = received else {
+            panic!("Wrong message type: {received:?}");
+        };
+        assert_eq!(data, b"hello again");
+
+        // Exactly one leaf per member — bob's stale leaf is gone.
+        let members = alice_group.members()?;
+        assert_eq!(members.len(), 3);
+        let bob_leaves = members
+            .iter()
+            .map(|m| m.identifier())
+            .collect::<Result<Vec<_>, _>>()?
+            .into_iter()
+            .filter(|id| id == b"bob")
+            .count();
+        assert_eq!(bob_leaves, 1);
 
         Ok(())
     }

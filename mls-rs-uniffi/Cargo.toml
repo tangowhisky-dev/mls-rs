@@ -38,7 +38,7 @@ openssl = [
 [dependencies]
 async-trait = "0.1.77"
 maybe-async = "0.2.10"
-mls-rs = { version = "0.56.0", path = "../mls-rs" }
+mls-rs = { version = "0.56.0", path = "../mls-rs", features = ["external_client"] }
 mls-rs-core = { version = "0.27.0", path = "../mls-rs-core" }
 mls-rs-crypto-openssl = { version = "0.21.0", path = "../mls-rs-crypto-openssl", optional = true }
 mls-rs-crypto-rustcrypto = { version = "0.22.1", path = "../mls-rs-crypto-rustcrypto", optional = true }

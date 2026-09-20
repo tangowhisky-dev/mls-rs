@@ -19,6 +19,7 @@ mls-rs = { path = "../../../mls-rs", default-features = false, features = [
     "rfc_compliant",
     "tree_index",
     "fast_serialize",
+    "external_client",
 ] }
 mls-rs-core = { path = "../../../mls-rs-core", default-features = false, features = ["std"] }
 mls-rs-identity-x509 = { path = "../../../mls-rs-identity-x509", default-features = false, features = [

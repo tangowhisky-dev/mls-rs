@@ -138,6 +138,66 @@ export async function runAll(wasm, loadCert, log = console.log) {
     );
   }
 
+  // A device that lost its local group state — but is still in the
+  // roster — rejoins by external commit, replacing its stale leaf.
+  async function runExternalCommit(suite) {
+    const mk = async (who) =>
+      new WasmClient(
+        text.encode(who),
+        await wasm.generate_signature_keypair(suite),
+      );
+    const alice = await mk("alice");
+    const bob = await mk("bob");
+    const carol = await mk("carol");
+
+    const aliceGroup = await alice.createGroup();
+    const commit = await aliceGroup.addMembers(
+      toArrays([
+        await bob.generateKeyPackageMessage(),
+        await carol.generateKeyPackageMessage(),
+      ]),
+    );
+    await aliceGroup.processIncomingMessage(commit.commit_message);
+    const bobGroup = await bob.joinGroup(commit.welcome_message);
+    const carolGroup = await carol.joinGroup(commit.welcome_message);
+
+    // bob's device lost its group state: a fresh client for the same
+    // credential identity (fresh signature keypair, as a new key
+    // package would carry).
+    const bob2 = await mk("bob");
+    const groupInfo = await aliceGroup.groupInfoForExternalCommit(true);
+    const join = await bob2.externalCommit(groupInfo);
+    assert(
+      join.removed_leaf_index !== undefined &&
+        join.removed_leaf_index !== null,
+      "expected a stale-leaf removal",
+    );
+
+    // Everyone still in the group applies the external commit.
+    await aliceGroup.processIncomingMessage(join.commit_message);
+    await carolGroup.processIncomingMessage(join.commit_message);
+    await bobGroup.processIncomingMessage(join.commit_message);
+
+    const bob2Group = join.takeGroup();
+    const ct = await bob2Group.encryptApplicationMessage(
+      text.encode("hello again"),
+    );
+    const received = await aliceGroup.processIncomingMessage(ct);
+    assert(received.kind === "application", "expected application message");
+    assert(
+      new TextDecoder().decode(received.data) === "hello again",
+      "plaintext mismatch",
+    );
+
+    // Exactly one leaf per member — bob's stale leaf is gone.
+    const members = await aliceGroup.members();
+    assert(members.length === 3, `expected 3 members, got ${members.length}`);
+    const bobLeaves = members.filter(
+      (m) => new TextDecoder().decode(m.identity) === "bob",
+    );
+    assert(bobLeaves.length === 1, "bob duplicated in roster");
+  }
+
   const X509_SCENARIOS = [
     ["ed25519", WasmCipherSuite.Curve25519Aes128],
     ["ed25519", WasmCipherSuite.Curve25519ChaCha],
@@ -164,6 +224,14 @@ export async function runAll(wasm, loadCert, log = console.log) {
   } catch (e) {
     failures++;
     log(`FAIL removal+roster suite 1: ${e}`);
+  }
+
+  try {
+    await runExternalCommit(WasmCipherSuite.Curve25519Aes128);
+    log("PASS external-commit suite 1:Curve25519Aes128");
+  } catch (e) {
+    failures++;
+    log(`FAIL external-commit suite 1: ${e}`);
   }
 
   for (const [curve, suite] of X509_SCENARIOS) {

@@ -21,6 +21,7 @@ objects and Rust uses its own types — noted where they differ.
 | `RatchetTree` | `bytes` | serialized `ExportedTree` |
 | `CommitOutput` | `commitMessage`, `welcomeMessage?`, `ratchetTree?`, `groupInfo?` | see [Adding members](add_members.md); WASM: `commit_message`, `welcome_message`, `ratchet_tree` |
 | `JoinInfo` | `group`, `groupInfoExtensions` | result of `joinGroup`; WASM returns just the group |
+| `ExternalJoinInfo` | `group`, `commitMessage`, `removedLeafIndex` | result of `externalCommit` — see [Joining via external commit](external_commit.md); WASM: `WasmExternalJoinInfo` with `takeGroup()` |
 | `Proposal` | (opaque object) | pending proposal — surfaced via `ReceivedMessage.ReceivedProposal` |
 | `Extension` / `ExtensionList` | (opaque objects) | custom extension plumbing; `groupInfoExtensions` on `JoinInfo` |
 

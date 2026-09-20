@@ -627,6 +627,104 @@ impl WasmClient {
             identity_provider: self.identity_provider.clone(),
         })
     }
+
+    /// Join a group by external commit — no welcome required.
+    ///
+    /// `group_info` must come from a member's
+    /// [`WasmGroup::groupInfoForExternalCommit`]; `ratchet_tree` is
+    /// required only when that GroupInfo was exported without the
+    /// ratchet-tree extension.
+    ///
+    /// When the roster still carries a leaf with this client's
+    /// credential — a device that lost its local group state while
+    /// remaining a member everywhere else — the commit removes that
+    /// stale leaf, so a single commit replaces it. Otherwise this is
+    /// a plain external join.
+    #[wasm_bindgen(js_name = "externalCommit")]
+    pub async fn external_commit(
+        &self,
+        group_info: &[u8],
+        ratchet_tree: Option<Vec<u8>>,
+    ) -> Result<WasmExternalJoinInfo, JsError> {
+        let group_info = mls_rs::MlsMessage::from_bytes(group_info).map_err(js_error)?;
+        let tree = ratchet_tree
+            .map(|bytes| mls_rs::group::ExportedTree::from_bytes(&bytes))
+            .transpose()
+            .map_err(js_error)?;
+
+        // Locate our stale leaf, if any: observe the group and match
+        // our credential — a same-credential leaf is this client's
+        // prior self awaiting replacement.
+        let observer = mls_rs::external_client::ExternalClient::builder()
+            .crypto_provider(RustCryptoProvider::default())
+            .identity_provider(self.identity_provider.clone())
+            .build();
+        let observed = observer
+            .observe_group(group_info.clone(), tree.clone(), None)
+            .await
+            .map_err(mls_error)?;
+        let to_remove = observed
+            .roster()
+            .members()
+            .into_iter()
+            .find(|m| m.signing_identity.credential == self.signing_identity.credential)
+            .map(|m| m.index());
+
+        let client = self.client().await;
+        let mut builder = client.external_commit_builder().map_err(mls_error)?;
+        if let Some(index) = to_remove {
+            builder = builder.with_removal(index);
+        }
+        if let Some(tree) = tree {
+            builder = builder.with_tree_data(tree);
+        }
+        let (group, commit_message) =
+            builder.build(group_info).await.map_err(mls_error)?;
+
+        Ok(WasmExternalJoinInfo {
+            group: Some(WasmGroup {
+                inner: Mutex::new(group),
+                identity_provider: self.identity_provider.clone(),
+            }),
+            commit_message: commit_message.to_bytes().map_err(js_error)?,
+            removed_leaf_index: to_remove,
+        })
+    }
+}
+
+/// The result of [`WasmClient::externalCommit`]: the freshly joined
+/// group plus the commit message that must be fanned out to the
+/// existing members.
+#[wasm_bindgen]
+pub struct WasmExternalJoinInfo {
+    group: Option<WasmGroup>,
+    commit_message: Vec<u8>,
+    removed_leaf_index: Option<u32>,
+}
+
+#[wasm_bindgen]
+impl WasmExternalJoinInfo {
+    /// The joined group. Consumes the value — call exactly once.
+    #[wasm_bindgen(js_name = "takeGroup")]
+    pub fn take_group(&mut self) -> Result<WasmGroup, JsError> {
+        self.group
+            .take()
+            .ok_or_else(|| JsError::new("external join group already taken"))
+    }
+
+    /// The external commit message — send it to the group like any
+    /// other commit.
+    #[wasm_bindgen(getter)]
+    pub fn commit_message(&self) -> Vec<u8> {
+        self.commit_message.clone()
+    }
+
+    /// The roster leaf index the commit removed (our stale leaf), if
+    /// any.
+    #[wasm_bindgen(getter)]
+    pub fn removed_leaf_index(&self) -> Option<u32> {
+        self.removed_leaf_index
+    }
 }
 
 /// Persistent-storage API — IndexedDB-backed, always asynchronous
@@ -1077,6 +1175,23 @@ impl WasmGroup {
         self.group()
             .await
             .export_tree()
+            .to_bytes()
+            .map_err(js_error)
+    }
+
+    /// Export this group's public `GroupInfo` for external-commit
+    /// joins (see [`WasmClient::externalCommit`]). Pass `true` to
+    /// embed the ratchet tree so joiners need no out-of-band tree.
+    #[wasm_bindgen(js_name = "groupInfoForExternalCommit")]
+    pub async fn group_info_for_external_commit(
+        &self,
+        with_tree_in_extension: bool,
+    ) -> Result<Vec<u8>, JsError> {
+        self.group()
+            .await
+            .group_info_message_allowing_ext_commit(with_tree_in_extension)
+            .await
+            .map_err(mls_error)?
             .to_bytes()
             .map_err(js_error)
     }

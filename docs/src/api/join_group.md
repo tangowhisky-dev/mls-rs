@@ -4,6 +4,10 @@ A new member joins from a **Welcome** message produced by an
 `addMembers` commit. The welcome is encrypted to the new member's key
 package — only they can read it.
 
+> Lost your local group state but your leaf is still in the roster?
+> Don't wait for a new welcome — see
+> [Joining via external commit](external_commit.md) for self-repair.
+
 ## `Client::join_group`
 
 | Platform | Signature | Returns |

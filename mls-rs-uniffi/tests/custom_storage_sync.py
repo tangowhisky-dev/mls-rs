@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
 
 from mls_rs_uniffi import CipherSuite, generate_signature_keypair, Client, \
-    GroupStateStorage, EpochRecord, ClientConfig, ProtocolVersion
+    GroupStateStorage, EpochRecord, ClientConfig, KeyPackageStorage, \
+    ProtocolVersion
 
 
 @dataclass
@@ -61,8 +62,25 @@ class PythonGroupStateStorage(GroupStateStorage):
         return last.id
 
 
+class PythonKeyPackageStorage(KeyPackageStorage):
+
+    def __init__(self):
+        self.packages: dict[str, bytes] = {}
+
+    def insert(self, id: bytes, pkg: bytes):
+        self.packages[id.hex()] = pkg
+
+    def get(self, id: bytes):
+        return self.packages.get(id.hex())
+
+    def delete(self, id: bytes):
+        self.packages.pop(id.hex(), None)
+
+
 group_state_storage = PythonGroupStateStorage()
+key_package_storage = PythonKeyPackageStorage()
 client_config = ClientConfig(group_state_storage=group_state_storage,
+                             key_package_storage=key_package_storage,
                              use_ratchet_tree_extension=True,
                              root_ca_certificates=[],
                              allow_self_signed_certificates=False)

@@ -25,6 +25,7 @@
 - [Key packages](api/key_packages.md)
 - [Creating groups](api/create_group.md)
 - [Joining groups](api/join_group.md)
+- [Joining via external commit](api/external_commit.md)
 - [Adding members](api/add_members.md)
 - [Removing members](api/remove_members.md)
 - [Commits & epochs](api/commits.md)

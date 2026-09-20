@@ -25,6 +25,7 @@ mls-rs-uniffi = { path = "...", default-features = false, features = ["openssl"]
 | Feature | Effect |
 |---------|--------|
 | `x509` | X.509 credential types |
+| `external_client` | `ExternalClient` / external-commit joins — enabled by `mls-rs-uniffi` and `mls-rs-wasm` |
 | `by_ref_credential_proposal` | reference-style credentials in proposals |
 | `rayon` (default) | parallel tree ops — **must be off** for `wasm32` (`default-features = false`) |
 | `std`, `rfc_compliant`, `tree_index`, `fast_serialize` | the set used by the wasm crate — see `platform_testbeds/wasm/mls-rs-wasm/Cargo.toml` |
