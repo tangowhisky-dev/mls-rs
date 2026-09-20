@@ -408,6 +408,7 @@ impl Client {
         let signing_identity = identity::SigningIdentity::new(credential, public_key.into());
         let commit_options = mls_rules::CommitOptions::default()
             .with_ratchet_tree_extension(client_config.use_ratchet_tree_extension)
+            .with_allow_external_commit(true)
             .with_single_welcome_message(true);
         let mls_rules = mls_rules::DefaultMlsRules::new().with_commit_options(commit_options);
         let client = mls_rs::Client::builder()
@@ -1233,12 +1234,14 @@ mod tests {
 
         // bob's device lost its group state: a fresh client for the
         // same credential identity (fresh signature keypair, as a new
-        // key package would carry).
+        // key package would carry). The GroupInfo is the one the
+        // commit itself produced — the blob a delivery service
+        // stores.
         let bob2_config = ClientConfig::default();
         let bob2_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
         let bob2 = Client::new(b"bob".to_vec(), bob2_keypair, bob2_config)?;
 
-        let group_info = alice_group.group_info_message_allowing_ext_commit(true)?;
+        let group_info = commit.group_info.expect("commit carried no GroupInfo");
         let join = bob2.external_commit(&group_info, None)?;
         assert!(join.removed_leaf_index.is_some());
 

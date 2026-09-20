@@ -392,6 +392,7 @@ fn make_client(
 
     let commit_options = mls_rules::CommitOptions::default()
         .with_ratchet_tree_extension(options.use_ratchet_tree_extension)
+        .with_allow_external_commit(true)
         .with_single_welcome_message(true);
     let mls_rules = DefaultMlsRules::new().with_commit_options(commit_options);
 
@@ -883,6 +884,7 @@ pub struct WasmCommitOutput {
     commit_message: Vec<u8>,
     welcome_message: Option<Vec<u8>>,
     ratchet_tree: Option<Vec<u8>>,
+    group_info: Option<Vec<u8>>,
 }
 
 #[wasm_bindgen]
@@ -901,6 +903,14 @@ impl WasmCommitOutput {
     pub fn ratchet_tree(&self) -> Option<Vec<u8>> {
         self.ratchet_tree.clone()
     }
+
+    /// The new epoch's `GroupInfo` (external-commit enabled) —
+    /// publish it on the delivery service so external joiners and
+    /// stranded devices can enter/rejoin at this epoch.
+    #[wasm_bindgen(getter)]
+    pub fn group_info(&self) -> Option<Vec<u8>> {
+        self.group_info.clone()
+    }
 }
 
 fn commit_output_of(output: mls_rs::group::CommitOutput) -> Result<WasmCommitOutput, JsError> {
@@ -916,6 +926,11 @@ fn commit_output_of(output: mls_rs::group::CommitOutput) -> Result<WasmCommitOut
         ratchet_tree: output
             .ratchet_tree
             .map(|tree| tree.to_bytes())
+            .transpose()
+            .map_err(js_error)?,
+        group_info: output
+            .external_commit_group_info
+            .map(|gi| gi.to_bytes())
             .transpose()
             .map_err(js_error)?,
     })

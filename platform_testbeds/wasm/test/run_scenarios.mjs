@@ -163,10 +163,14 @@ export async function runAll(wasm, loadCert, log = console.log) {
 
     // bob's device lost its group state: a fresh client for the same
     // credential identity (fresh signature keypair, as a new key
-    // package would carry).
+    // package would carry). The GroupInfo is the one the commit
+    // itself produced — the blob a delivery service would store.
+    assert(
+      commit.group_info && commit.group_info.length > 0,
+      "commit carried no external-commit GroupInfo",
+    );
     const bob2 = await mk("bob");
-    const groupInfo = await aliceGroup.groupInfoForExternalCommit(true);
-    const join = await bob2.externalCommit(groupInfo);
+    const join = await bob2.externalCommit(commit.group_info);
     assert(
       join.removed_leaf_index !== undefined &&
         join.removed_leaf_index !== null,
