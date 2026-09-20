@@ -1257,6 +1257,15 @@ mod tests {
         };
         assert_eq!(data, b"hello again");
 
+        // Both directions: the joiner decrypts existing members'
+        // post-join traffic too.
+        let from_alice = alice_group.encrypt_application_message(b"welcome back")?;
+        let received = join.group.process_incoming_message(from_alice.into())?;
+        let ReceivedMessage::ApplicationMessage { sender: _, data } = received else {
+            panic!("Wrong message type: {received:?}");
+        };
+        assert_eq!(data, b"welcome back");
+
         // Exactly one leaf per member — bob's stale leaf is gone.
         let members = alice_group.members()?;
         assert_eq!(members.len(), 3);
@@ -1268,6 +1277,58 @@ mod tests {
             .filter(|id| id == b"bob")
             .count();
         assert_eq!(bob_leaves, 1);
+
+        Ok(())
+    }
+
+    /// Production repair shape: the SAME device (same signing
+    /// identity, same signature key) rejoins after losing group
+    /// state — the external commit swaps its own leaf in place.
+    #[test]
+    #[cfg(not(mls_build_async))]
+    fn test_external_commit_same_device_rejoin() -> Result<(), Error> {
+        let alice_config = ClientConfig::default();
+        let alice_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
+        let alice = Client::new(b"alice".to_vec(), alice_keypair, alice_config)?;
+
+        let bob_config = ClientConfig::default();
+        let bob_keypair = generate_signature_keypair(CipherSuite::Curve25519Aes128)?;
+        let bob = Client::new(b"bob".to_vec(), bob_keypair.clone(), bob_config)?;
+
+        let alice_group = alice.create_group(None)?;
+        let bob_key_package = bob.generate_key_package_message()?;
+        let commit = alice_group.add_members(vec![Arc::new(bob_key_package)])?;
+        alice_group.process_incoming_message(commit.commit_message)?;
+        let welcome = commit.welcome_message.unwrap();
+        let bob_group = bob.join_group(None, &welcome)?.group;
+
+        // Bob loses local group state but keeps his identity — a
+        // fresh Client with the SAME signing identity + signature
+        // keypair, like an app reinit on the same device.
+        let bob2_config = ClientConfig::default();
+        let bob2 = Client::new(b"bob".to_vec(), bob_keypair, bob2_config)?;
+
+        let group_info = commit.group_info.expect("commit carried no GroupInfo");
+        let join = bob2.external_commit(&group_info, None)?;
+        assert!(join.removed_leaf_index.is_some());
+
+        alice_group.process_incoming_message(join.commit_message.clone())?;
+        bob_group.process_incoming_message(join.commit_message.clone())?;
+
+        // Both directions through the replaced leaf's epoch.
+        let message = join.group.encrypt_application_message(b"i'm back")?;
+        let received = alice_group.process_incoming_message(message.into())?;
+        let ReceivedMessage::ApplicationMessage { sender: _, data } = received else {
+            panic!("Wrong message type: {received:?}");
+        };
+        assert_eq!(data, b"i'm back");
+
+        let from_alice = alice_group.encrypt_application_message(b"welcome back")?;
+        let received = join.group.process_incoming_message(from_alice.into())?;
+        let ReceivedMessage::ApplicationMessage { sender: _, data } = received else {
+            panic!("Wrong message type: {received:?}");
+        };
+        assert_eq!(data, b"welcome back");
 
         Ok(())
     }
