@@ -1017,6 +1017,44 @@ impl WasmGroup {
 #[cfg_attr(mls_build_async, maybe_async::must_be_async)]
 #[wasm_bindgen]
 impl WasmGroup {
+    /// The current epoch from the authenticated MLS group state.
+    #[wasm_bindgen(js_name = "currentEpoch")]
+    pub async fn current_epoch(&self) -> u64 {
+        self.group().await.current_epoch()
+    }
+
+    /// The authenticated MLS group identifier.
+    #[wasm_bindgen(js_name = "groupId")]
+    pub async fn group_id(&self) -> Vec<u8> {
+        self.group().await.group_id().to_vec()
+    }
+
+    /// True while a commit is staged but not yet applied or cleared.
+    #[wasm_bindgen(js_name = "hasPendingCommit")]
+    pub async fn has_pending_commit(&self) -> bool {
+        self.group().await.has_pending_commit()
+    }
+
+    /// Discard a staged-but-unapplied commit — the DS rejected it
+    /// (epoch conflict / pending-removes rebuild / lost ACK). Without
+    /// this the next commit fails with "commit already pending".
+    #[wasm_bindgen(js_name = "clearPendingCommit")]
+    pub async fn clear_pending_commit(&self) {
+        self.group().await.clear_pending_commit()
+    }
+
+    /// Apply the staged pending commit — the DS recorded it but its
+    /// `<committed>` verdict was lost. Applies the exact staged state.
+    #[wasm_bindgen(js_name = "applyPendingCommit")]
+    pub async fn apply_pending_commit(&self) -> Result<(), JsError> {
+        self.group()
+            .await
+            .apply_pending_commit()
+            .await
+            .map_err(js_error)?;
+        Ok(())
+    }
+
     /// Add members by key-package messages; returns commit + welcome.
     #[wasm_bindgen(js_name = "addMembers")]
     pub async fn add_members(

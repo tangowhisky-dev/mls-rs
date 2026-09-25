@@ -821,6 +821,16 @@ async fn signing_identity_to_identifier(
 #[cfg_attr(mls_build_async, maybe_async::must_be_async)]
 #[uniffi::export]
 impl Group {
+    /// The current epoch from the authenticated MLS group state.
+    pub async fn current_epoch(&self) -> u64 {
+        self.inner().await.current_epoch()
+    }
+
+    /// The authenticated MLS group identifier.
+    pub async fn group_id(&self) -> Vec<u8> {
+        self.inner().await.group_id().to_vec()
+    }
+
     /// List the current members' signing identities.
     ///
     /// The returned identities are in no particular order; use
@@ -941,6 +951,39 @@ impl Group {
         }
         let commit_output = commit_builder.build().await?;
         commit_output.try_into()
+    }
+
+    /// True while a commit is staged but not yet applied (waiting on
+    /// the DS `<committed>` fence) or cleared.
+    ///
+    /// See [`mls_rs::Group::has_pending_commit`].
+    pub async fn has_pending_commit(&self) -> bool {
+        self.inner().await.has_pending_commit()
+    }
+
+    /// Discard a staged-but-unapplied commit — the DS rejected it
+    /// (epoch conflict / pending-removes rebuild / lost ACK). The
+    /// group keeps its pre-commit state; without this the next
+    /// `commit`/`add_members`/`remove_members` fails with
+    /// "commit already pending" forever.
+    ///
+    /// See [`mls_rs::Group::clear_pending_commit`].
+    pub async fn clear_pending_commit(&self) {
+        self.inner().await.clear_pending_commit()
+    }
+
+    /// Apply the staged pending commit — the DS recorded it but its
+    /// `<committed>` verdict was lost (IQ timeout after the epoch
+    /// bump, process killed between ACK and self-apply). Unlike
+    /// re-feeding the commit bytes through `process_incoming_message`
+    /// this applies the exact staged state, so it can't diverge from
+    /// what the fence recorded.
+    ///
+    /// See [`mls_rs::Group::apply_pending_commit`].
+    pub async fn apply_pending_commit(&self) -> Result<(), Error> {
+        let mut group = self.inner().await;
+        group.apply_pending_commit().await?;
+        Ok(())
     }
 
     /// Propose to add one or more members to this group.
