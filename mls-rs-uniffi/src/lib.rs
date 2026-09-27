@@ -743,6 +743,16 @@ impl SigningIdentity {
     pub async fn identifier(&self) -> Result<Vec<u8>, Error> {
         signing_identity_to_identifier(&self.inner).await
     }
+
+    /// The member's signature public key (suite-encoded).
+    ///
+    /// Combined with [`SigningIdentity::identifier`] this yields the
+    /// per-device fingerprint (`sha256` of these bytes) that
+    /// verification UIs compare — derived from the authenticated MLS
+    /// tree, not delivery-service bookkeeping.
+    pub fn signature_key(&self) -> SignaturePublicKey {
+        self.inner.signature_key.clone().into()
+    }
 }
 
 /// An MLS end-to-end encrypted group.
