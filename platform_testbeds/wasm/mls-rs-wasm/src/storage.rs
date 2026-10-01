@@ -331,6 +331,52 @@ impl IdbBackend {
             .map_err(StorageError)
     }
 
+    /// Delete every row belonging to `group_id`: the `groups` state
+    /// record plus all `epochs` rows under its hex prefix. One
+    /// read-write transaction so a group can never vanish partially.
+    async fn delete_group(&self, group_id: &[u8]) -> Result<(), String> {
+        let prefix = format!("{}:", hex(group_id));
+        let gid_key = hex(group_id);
+        let tx = self
+            .db
+            .transaction(&[STORE_GROUPS, STORE_EPOCHS], TransactionMode::ReadWrite)
+            .map_err(err_string)?;
+
+        let epoch_keys = tx
+            .object_store(STORE_EPOCHS)
+            .map_err(err_string)?
+            .get_all_keys(None, None)
+            .map_err(err_string)?
+            .await
+            .map_err(err_string)?;
+
+        for key in epoch_keys {
+            if let Some(key) = key.as_string() {
+                if key.starts_with(&prefix) {
+                    tx.object_store(STORE_EPOCHS)
+                        .map_err(err_string)?
+                        .delete(Query::from(wasm_bindgen::JsValue::from_str(&key)))
+                        .map_err(err_string)?
+                        .await
+                        .map_err(err_string)?;
+                }
+            }
+        }
+
+        tx.object_store(STORE_GROUPS)
+            .map_err(err_string)?
+            .delete(Query::from(wasm_bindgen::JsValue::from_str(&gid_key)))
+            .map_err(err_string)?
+            .await
+            .map_err(err_string)?;
+
+        tx.commit()
+            .map_err(err_string)?
+            .await
+            .map_err(err_string)
+            .map(|_| ())
+    }
+
     /// Close the IndexedDB connection. Pending write-behind
     /// transactions keep running to completion — `close` only blocks
     /// new ones, matching `IDBDatabase.close()` semantics.
@@ -466,6 +512,27 @@ impl IdbGroupStateStorage {
             ops.push(del(STORE_EPOCHS, epoch_key(&state.id, id)));
         }
         Ok(ops)
+    }
+
+    /// All group ids with persisted state — `mem` is a hydrated
+    /// mirror of the `groups` store, so this enumerates durable
+    /// groups for in-memory clients and persistent ones alike.
+    pub fn group_ids(&self) -> Vec<Vec<u8>> {
+        self.mem.stored_groups()
+    }
+
+    /// Delete all state for `group_id`: the hydrated in-memory entry
+    /// plus its `groups`/`epochs` IndexedDB rows. Callers drop any
+    /// live `WasmGroup` first — mls-rs keeps group state in memory
+    /// once loaded, so deleting under an open group only discards the
+    /// durable copy until the next `write_to_storage` resurrects it.
+    pub async fn delete_group(&self, group_id: &[u8]) -> Result<(), JsError> {
+        self.mem.delete_group(group_id);
+        self.epoch_ids.lock().unwrap().remove(group_id);
+        if let Some(backend) = &self.backend {
+            backend.delete_group(group_id).await.map_err(js_err)?;
+        }
+        Ok(())
     }
 }
 

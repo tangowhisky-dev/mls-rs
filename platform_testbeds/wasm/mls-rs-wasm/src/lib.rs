@@ -375,6 +375,10 @@ pub struct WasmClient {
     /// `openPersistent*`.
     #[cfg(target_family = "wasm")]
     storage_backend: Option<std::sync::Arc<storage::IdbBackend>>,
+    /// Clone of the group-state store handed to `make_client` —
+    /// `deleteGroup`/`listGroupIds` operate on it directly.
+    #[cfg(target_family = "wasm")]
+    group_storage: GroupStore,
 }
 
 fn make_client(
@@ -448,7 +452,7 @@ impl WasmClient {
             credential,
             keypair,
             &options,
-            group_store,
+            group_store.clone(),
             key_package_store,
         )?;
         Ok(WasmClient {
@@ -458,6 +462,8 @@ impl WasmClient {
             x509_chain: None,
             #[cfg(target_family = "wasm")]
             storage_backend: None,
+            #[cfg(target_family = "wasm")]
+            group_storage: group_store,
         })
     }
 
@@ -507,7 +513,7 @@ impl WasmClient {
             chain.into_credential(),
             keypair,
             &options,
-            group_store,
+            group_store.clone(),
             key_package_store,
         )?;
         Ok(WasmClient {
@@ -517,6 +523,8 @@ impl WasmClient {
             x509_chain: Some(chain_bytes),
             #[cfg(target_family = "wasm")]
             storage_backend: None,
+            #[cfg(target_family = "wasm")]
+            group_storage: group_store,
         })
     }
 
@@ -679,8 +687,7 @@ impl WasmClient {
         if let Some(tree) = tree {
             builder = builder.with_tree_data(tree);
         }
-        let (group, commit_message) =
-            builder.build(group_info).await.map_err(mls_error)?;
+        let (group, commit_message) = builder.build(group_info).await.map_err(mls_error)?;
 
         Ok(WasmExternalJoinInfo {
             group: Some(WasmGroup {
@@ -764,7 +771,7 @@ impl WasmClient {
             credential,
             keypair,
             &options,
-            group_store,
+            group_store.clone(),
             key_package_store,
         )?;
         Ok(WasmClient {
@@ -773,6 +780,8 @@ impl WasmClient {
             signing_identity,
             x509_chain: None,
             storage_backend: Some(backend),
+            #[cfg(target_family = "wasm")]
+            group_storage: group_store,
         })
     }
 
@@ -822,7 +831,7 @@ impl WasmClient {
             chain.into_credential(),
             keypair,
             &options,
-            group_store,
+            group_store.clone(),
             key_package_store,
         )?;
         Ok(WasmClient {
@@ -831,6 +840,8 @@ impl WasmClient {
             signing_identity,
             x509_chain: Some(chain_bytes),
             storage_backend: Some(backend),
+            #[cfg(target_family = "wasm")]
+            group_storage: group_store,
         })
     }
 
@@ -867,6 +878,32 @@ impl WasmClient {
     #[wasm_bindgen(js_name = "deletePersistentStorage")]
     pub async fn delete_persistent_storage(name: String) -> Result<(), JsError> {
         storage::delete_database(&name).await
+    }
+
+    /// Delete all persisted state for `group_id`: the state record,
+    /// every retained prior-epoch record, and the hydrated in-memory
+    /// copy. Re-joining later still works — a fresh welcome or
+    /// external commit creates the group anew.
+    ///
+    /// Callers MUST free any live [`WasmGroup`] for this id first:
+    /// mls-rs holds loaded group state in memory, so a `writeToStorage`
+    /// on a still-open group would resurrect the deleted rows.
+    #[wasm_bindgen(js_name = "deleteGroup")]
+    pub async fn delete_group(&self, group_id: Vec<u8>) -> Result<(), JsError> {
+        self.group_storage.delete_group(&group_id).await
+    }
+
+    /// Every group id with persisted state — feeds the application's
+    /// orphan sweep (stored minus live conversation/call groups is
+    /// dead state to [`WasmClient::deleteGroup`]). Works for
+    /// in-memory clients too (`mem` is the hydrated mirror).
+    #[wasm_bindgen(js_name = "listGroupIds")]
+    pub fn list_group_ids(&self) -> js_sys::Array {
+        let out = js_sys::Array::new();
+        for id in self.group_storage.group_ids() {
+            out.push(&js_sys::Uint8Array::from(id.as_slice()));
+        }
+        out
     }
 }
 
